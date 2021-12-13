@@ -22,7 +22,7 @@ set :puma_error_log, "#{release_path}/log/puma.access.log"
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, false
-set :deploy_to, "/var/www/app_name"
+set :deploy_to, "/var/www/my-test"
 
 namespace :puma do
  desc "Create Directories for Puma Pids and Socket"
@@ -40,8 +40,8 @@ namespace :deploy do
  desc "Make sure local git is in sync with remote."
  task :check_revision do
  on roles(:app) do
- unless `git rev-parse HEAD` == `git rev-parse origin/master`
- puts "WARNING: HEAD is not the same as origin/master"
+ unless `git rev-parse HEAD` == `git rev-parse origin/main`
+ puts "WARNING: HEAD is not the same as origin/main"
  puts "Run `git push` to sync changes."
  exit
  end
@@ -69,7 +69,7 @@ namespace :deploy do
  after :finishing, :cleanup
  after :finishing, :restart
 end
-# Default branch is :master
+# Default branch is :main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
