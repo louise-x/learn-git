@@ -3041,3 +3041,624 @@
  DEBUG [0b80c45c] 	Command restart sent success
  DEBUG [0b80c45c] 	
   INFO [0b80c45c] Finished in 1.559 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-12-13 09:04:51 +0800 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [47950b06] Running [ -d ~/.rvm ] as ec2-user@35.88.151.149
+ DEBUG [47950b06] Command: [ -d ~/.rvm ]
+ DEBUG [47950b06] Finished in 3.376 seconds with exit status 0 (successful).
+ DEBUG [d07101a6] Running ~/.rvm/bin/rvm version as ec2-user@35.88.151.149
+ DEBUG [d07101a6] Command: ~/.rvm/bin/rvm version
+ DEBUG [d07101a6] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [d07101a6] 	
+ DEBUG [d07101a6] Finished in 0.781 seconds with exit status 0 (successful).
+ DEBUG [b28e6345] Running ~/.rvm/bin/rvm current as ec2-user@35.88.151.149
+ DEBUG [b28e6345] Command: ~/.rvm/bin/rvm current
+ DEBUG [b28e6345] 	ruby-2.6.6
+ DEBUG [b28e6345] 	
+ DEBUG [b28e6345] Finished in 0.784 seconds with exit status 0 (successful).
+ DEBUG [53959719] Running ~/.rvm/bin/rvm default do ruby --version as ec2-user@35.88.151.149
+ DEBUG [53959719] Command: ~/.rvm/bin/rvm default do ruby --version
+ DEBUG [53959719] 	ruby 2.6.6p146 (2020-03-31 revision 67876) [x86_64-linux]
+ DEBUG [53959719] 	
+ DEBUG [53959719] Finished in 0.918 seconds with exit status 0 (successful).
+  INFO [34f090cd] Running /usr/bin/env mkdir -p /tmp as ec2-user@35.88.151.149
+ DEBUG [34f090cd] Command: /usr/bin/env mkdir -p /tmp
+  INFO [34f090cd] Finished in 0.586 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-16066515911ccd6d71eb.sh 0.0%
+  INFO Uploading /tmp/git-ssh-16066515911ccd6d71eb.sh 100.0%
+  INFO [22189e08] Running /usr/bin/env chmod 700 /tmp/git-ssh-16066515911ccd6d71eb.sh as ec2-user@35.88.151.149
+ DEBUG [22189e08] Command: /usr/bin/env chmod 700 /tmp/git-ssh-16066515911ccd6d71eb.sh
+  INFO [22189e08] Finished in 0.545 seconds with exit status 0 (successful).
+  INFO [5cd86b55] Running /usr/bin/env git ls-remote git@github.com:louise-x/learn-git.git HEAD as ec2-user@35.88.151.149
+ DEBUG [5cd86b55] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-16066515911ccd6d71eb.sh" ; /usr/bin/env git ls-remote git@github.com:louise-x/learn-git.git HEAD )
+ DEBUG [5cd86b55] 	63b04e0b9940ad3a078b359d11f4f9506884b528	HEAD
+  INFO [5cd86b55] Finished in 2.128 seconds with exit status 0 (successful).
+  INFO [5ccd4aad] Running /usr/bin/env mkdir -p /var/www/my-test/shared /var/www/my-test/releases as ec2-user@35.88.151.149
+ DEBUG [5ccd4aad] Command: /usr/bin/env mkdir -p /var/www/my-test/shared /var/www/my-test/releases
+  INFO [5ccd4aad] Finished in 0.545 seconds with exit status 0 (successful).
+  INFO [8ece5018] Running /usr/bin/env mkdir -p /var/www/my-test/shared/public/assets as ec2-user@35.88.151.149
+ DEBUG [8ece5018] Command: /usr/bin/env mkdir -p /var/www/my-test/shared/public/assets
+  INFO [8ece5018] Finished in 0.589 seconds with exit status 0 (successful).
+ DEBUG [036ba96d] Running [ -f /var/www/my-test/shared/puma.rb ] as ec2-user@35.88.151.149
+ DEBUG [036ba96d] Command: [ -f /var/www/my-test/shared/puma.rb ]
+ DEBUG [036ba96d] Finished in 0.541 seconds with exit status 0 (successful).
+ DEBUG [ad374ca2] Running [ -f /var/www/my-test/current/REVISION ] as ec2-user@35.88.151.149
+ DEBUG [ad374ca2] Command: [ -f /var/www/my-test/current/REVISION ]
+ DEBUG [ad374ca2] Finished in 0.585 seconds with exit status 1 (failed).
+ DEBUG [29c3786b] Running [ -f /var/www/my-test/repo/HEAD ] as ec2-user@35.88.151.149
+ DEBUG [29c3786b] Command: [ -f /var/www/my-test/repo/HEAD ]
+ DEBUG [29c3786b] Finished in 0.547 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/my-test/repo
+ DEBUG [676dac7b] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [676dac7b] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [676dac7b] Finished in 0.584 seconds with exit status 0 (successful).
+  INFO [78df7fb8] Running /usr/bin/env git remote set-url origin git@github.com:louise-x/learn-git.git as ec2-user@35.88.151.149
+ DEBUG [78df7fb8] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-16066515911ccd6d71eb.sh" ; /usr/bin/env git remote set-url origin git@github.com:louise-x/learn-git.git )
+  INFO [78df7fb8] Finished in 0.557 seconds with exit status 0 (successful).
+  INFO [3c16c7db] Running /usr/bin/env git remote update --prune as ec2-user@35.88.151.149
+ DEBUG [3c16c7db] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-16066515911ccd6d71eb.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [3c16c7db] 	Fetching origin
+ DEBUG [3c16c7db] 	
+ DEBUG [3c16c7db] 	remote: Enumerating objects: 34, done.[K
+ DEBUG [3c16c7db] 	
+ DEBUG [3c16c7db] 	remote: Counting objects:   3% (1/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:   7% (2/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  11% (3/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  14% (4/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  18% (5/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  22% (6/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  25% (7/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  29% (8/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  33% (9/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  37% (10/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  40% (11/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  44% (12/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  48% (13/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  51% (14/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  55% (15/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  59% (16/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  62% (17/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  66% (18/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  70% (19/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  74% (20/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  77% (21/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  81% (22/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  85% (23/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  88% (24/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  92% (25/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects:  96% (26/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects: 100% (27/27)[K
+ DEBUG [3c16c7db] 	remote: Counting objects: 100% (27/27), done.[K
+ DEBUG [3c16c7db] 	
+ DEBUG [3c16c7db] 	remote: Compressing objects:  20% (1/5)[K
+ DEBUG [3c16c7db] 	remote: Compressing objects:  40% (2/5)[K
+ DEBUG [3c16c7db] 	remote: Compressing objects:  60% (3/5)[K
+ DEBUG [3c16c7db] 	remote: Compressing objects:  80% (4/5)[K
+ DEBUG [3c16c7db] 	remote: Compressing objects: 100% (5/5)[K
+ DEBUG [3c16c7db] 	remote: Compressing objects: 100% (5/5), done.[K
+ DEBUG [3c16c7db] 	
+ DEBUG [3c16c7db] 	Unpacking objects:   7% (1/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  14% (2/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  21% (3/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  28% (4/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  35% (5/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  42% (6/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  50% (7/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  57% (8/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  64% (9/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  71% (10/14)
+ DEBUG [3c16c7db] 	remote: Total 14 (delta 9), reused 14 (delta 9), pack-reused 0[K
+ DEBUG [3c16c7db] 	
+ DEBUG [3c16c7db] 	Unpacking objects:  78% (11/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  85% (12/14)
+ DEBUG [3c16c7db] 	Unpacking objects:  92% (13/14)
+ DEBUG [3c16c7db] 	Unpacking objects: 100% (14/14)
+ DEBUG [3c16c7db] 	Unpacking objects: 100% (14/14), 22.41 KiB | 1.72 MiB/s, done.
+ DEBUG [3c16c7db] 	
+ DEBUG [3c16c7db] 	From github.com:louise-x/learn-git
+ DEBUG [3c16c7db] 	
+ DEBUG [3c16c7db] 	   b960693..63b04e0  main       -> main
+ DEBUG [3c16c7db] 	
+  INFO [3c16c7db] Finished in 2.229 seconds with exit status 0 (successful).
+ DEBUG [f854fd90] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [f854fd90] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [f854fd90] Finished in 0.542 seconds with exit status 0 (successful).
+  INFO [3abfd666] Running /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010503 as ec2-user@35.88.151.149
+ DEBUG [3abfd666] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-16066515911ccd6d71eb.sh" ; /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010503 )
+  INFO [3abfd666] Finished in 0.589 seconds with exit status 0 (successful).
+  INFO [363e2dc1] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/my-test/releases/20211213010503 as ec2-user@35.88.151.149
+ DEBUG [363e2dc1] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-16066515911ccd6d71eb.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/my-test/releases/20211213010503 )
+  INFO [363e2dc1] Finished in 0.556 seconds with exit status 0 (successful).
+ DEBUG [ff46a0c2] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [ff46a0c2] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [ff46a0c2] Finished in 0.588 seconds with exit status 0 (successful).
+ DEBUG [deaff8f8] Running /usr/bin/env git rev-list --max-count=1 main as ec2-user@35.88.151.149
+ DEBUG [deaff8f8] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-16066515911ccd6d71eb.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [deaff8f8] 	63b04e0b9940ad3a078b359d11f4f9506884b528
+ DEBUG [deaff8f8] 	
+ DEBUG [deaff8f8] Finished in 0.545 seconds with exit status 0 (successful).
+ DEBUG [f0b3f8d8] Running if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [f0b3f8d8] Command: if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi
+ DEBUG [f0b3f8d8] Finished in 0.587 seconds with exit status 0 (successful).
+  INFO [0e64f216] Running /usr/bin/env echo "63b04e0b9940ad3a078b359d11f4f9506884b528" > REVISION as ec2-user@35.88.151.149
+ DEBUG [0e64f216] Command: cd /var/www/my-test/releases/20211213010503 && /usr/bin/env echo "63b04e0b9940ad3a078b359d11f4f9506884b528" > REVISION
+  INFO [0e64f216] Finished in 0.547 seconds with exit status 0 (successful).
+  INFO [9d2a539e] Running /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010503/public as ec2-user@35.88.151.149
+ DEBUG [9d2a539e] Command: /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010503/public
+  INFO [9d2a539e] Finished in 0.586 seconds with exit status 0 (successful).
+ DEBUG [91df0c7a] Running [ -L /var/www/my-test/releases/20211213010503/public/assets ] as ec2-user@35.88.151.149
+ DEBUG [91df0c7a] Command: [ -L /var/www/my-test/releases/20211213010503/public/assets ]
+ DEBUG [91df0c7a] Finished in 0.545 seconds with exit status 1 (failed).
+ DEBUG [4416cac4] Running [ -d /var/www/my-test/releases/20211213010503/public/assets ] as ec2-user@35.88.151.149
+ DEBUG [4416cac4] Command: [ -d /var/www/my-test/releases/20211213010503/public/assets ]
+ DEBUG [4416cac4] Finished in 0.593 seconds with exit status 1 (failed).
+  INFO [2e9a8ce5] Running /usr/bin/env ln -s /var/www/my-test/shared/public/assets /var/www/my-test/releases/20211213010503/public/assets as ec2-user@35.88.151.149
+ DEBUG [2e9a8ce5] Command: /usr/bin/env ln -s /var/www/my-test/shared/public/assets /var/www/my-test/releases/20211213010503/public/assets
+  INFO [2e9a8ce5] Finished in 0.547 seconds with exit status 0 (successful).
+ DEBUG [0e7f7d2a] Running if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [0e7f7d2a] Command: if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi
+ DEBUG [0e7f7d2a] Finished in 0.585 seconds with exit status 0 (successful).
+  INFO [d48463db] Running ~/.rvm/bin/rvm default do bundle config --local deployment true as ec2-user@35.88.151.149
+ DEBUG [d48463db] Command: cd /var/www/my-test/releases/20211213010503 && ~/.rvm/bin/rvm default do bundle config --local deployment true
+  INFO [d48463db] Finished in 1.196 seconds with exit status 0 (successful).
+  INFO [197b437b] Running ~/.rvm/bin/rvm default do bundle config --local path /var/www/my-test/shared/bundle as ec2-user@35.88.151.149
+ DEBUG [197b437b] Command: cd /var/www/my-test/releases/20211213010503 && ~/.rvm/bin/rvm default do bundle config --local path /var/www/my-test/shared/bundle
+  INFO [197b437b] Finished in 1.171 seconds with exit status 0 (successful).
+  INFO [34e07f2d] Running ~/.rvm/bin/rvm default do bundle config --local without development:test as ec2-user@35.88.151.149
+ DEBUG [34e07f2d] Command: cd /var/www/my-test/releases/20211213010503 && ~/.rvm/bin/rvm default do bundle config --local without development:test
+  INFO [34e07f2d] Finished in 1.137 seconds with exit status 0 (successful).
+ DEBUG [503f4c39] Running if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [503f4c39] Command: if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi
+ DEBUG [503f4c39] Finished in 0.589 seconds with exit status 0 (successful).
+ DEBUG [3a788f5e] Running ~/.rvm/bin/rvm default do bundle check as ec2-user@35.88.151.149
+ DEBUG [3a788f5e] Command: cd /var/www/my-test/releases/20211213010503 && ~/.rvm/bin/rvm default do bundle check
+ DEBUG [3a788f5e] 	[31mCannot write a changed lockfile while frozen.[0m
+ DEBUG [3a788f5e] 	
+ DEBUG [3a788f5e] 	The Gemfile's dependencies are satisfied
+ DEBUG [3a788f5e] 	
+ DEBUG [3a788f5e] Finished in 1.253 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+ DEBUG [ab676efd] Running if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [ab676efd] Command: if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi
+ DEBUG [ab676efd] Finished in 0.582 seconds with exit status 0 (successful).
+  INFO [b68dac41] Running /usr/bin/env yarn install --production as ec2-user@35.88.151.149
+ DEBUG [b68dac41] Command: cd /var/www/my-test/releases/20211213010503 && /usr/bin/env yarn install --production
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[1myarn install v1.22.15[22m
+ DEBUG [b68dac41] 	
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[34minfo[39m No lockfile found.
+ DEBUG [b68dac41] 	
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[2m[1/4][22m Resolving packages...
+ DEBUG [b68dac41] 	
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	⠁ 
+ DEBUG [b68dac41] 	[0K
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[2m[2/4][22m Fetching packages...
+ DEBUG [b68dac41] 	
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[2m[3/4][22m Linking dependencies...
+ DEBUG [b68dac41] 	
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[2m[4/4][22m Building fresh packages...
+ DEBUG [b68dac41] 	
+ DEBUG [b68dac41] 	[1B
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	[32msuccess[39m Saved lockfile.
+ DEBUG [b68dac41] 	
+ DEBUG [b68dac41] 	[2K
+ DEBUG [b68dac41] 	[1G
+ DEBUG [b68dac41] 	Done in 0.08s.
+ DEBUG [b68dac41] 	
+  INFO [b68dac41] Finished in 2.094 seconds with exit status 0 (successful).
+ DEBUG [ad4d3715] Running if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [ad4d3715] Command: if test ! -d /var/www/my-test/releases/20211213010503; then echo "Directory does not exist '/var/www/my-test/releases/20211213010503'" 1>&2; false; fi
+ DEBUG [ad4d3715] Finished in 0.587 seconds with exit status 0 (successful).
+  INFO [961fd3d4] Running ~/.rvm/bin/rvm default do bundle exec rake assets:precompile as ec2-user@35.88.151.149
+ DEBUG [961fd3d4] Command: cd /var/www/my-test/releases/20211213010503 && ( export RAILS_ENV="production" RAILS_GROUPS="" ; ~/.rvm/bin/rvm default do bundle exec rake assets:precompile )
+ DEBUG [961fd3d4] 	[31mYou are trying to install in deployment mode after changing
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	your Gemfile. Run `bundle install` elsewhere and add the
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	updated Gemfile.lock to version control.
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	If this is a development machine, remove the /var/www/my-test/releases/20211213010503/Gemfile freeze 
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	by running `bundle config unset deployment`.
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	The dependencies in your gemfile changed
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	You have added to the Gemfile:
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	* capistrano3-rvm
+ DEBUG [961fd3d4] 	
+ DEBUG [961fd3d4] 	[0m
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-12-13 09:06:47 +0800 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [3c2fb535] Running [ -d ~/.rvm ] as ec2-user@35.88.151.149
+ DEBUG [3c2fb535] Command: [ -d ~/.rvm ]
+ DEBUG [3c2fb535] Finished in 2.721 seconds with exit status 0 (successful).
+ DEBUG [22c22eae] Running ~/.rvm/bin/rvm version as ec2-user@35.88.151.149
+ DEBUG [22c22eae] Command: ~/.rvm/bin/rvm version
+ DEBUG [22c22eae] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [22c22eae] 	
+ DEBUG [22c22eae] Finished in 0.748 seconds with exit status 0 (successful).
+ DEBUG [a8527827] Running ~/.rvm/bin/rvm current as ec2-user@35.88.151.149
+ DEBUG [a8527827] Command: ~/.rvm/bin/rvm current
+ DEBUG [a8527827] 	ruby-2.6.6
+ DEBUG [a8527827] 	
+ DEBUG [a8527827] Finished in 0.786 seconds with exit status 0 (successful).
+ DEBUG [1c6eddf1] Running ~/.rvm/bin/rvm default do ruby --version as ec2-user@35.88.151.149
+ DEBUG [1c6eddf1] Command: ~/.rvm/bin/rvm default do ruby --version
+ DEBUG [1c6eddf1] 	ruby 2.6.6p146 (2020-03-31 revision 67876) [x86_64-linux]
+ DEBUG [1c6eddf1] 	
+ DEBUG [1c6eddf1] Finished in 0.907 seconds with exit status 0 (successful).
+  INFO [b6d0fb19] Running /usr/bin/env mkdir -p /tmp as ec2-user@35.88.151.149
+ DEBUG [b6d0fb19] Command: /usr/bin/env mkdir -p /tmp
+  INFO [b6d0fb19] Finished in 0.590 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-99ca431ab374716d9cb7.sh 0.0%
+  INFO Uploading /tmp/git-ssh-99ca431ab374716d9cb7.sh 100.0%
+  INFO [5be76c60] Running /usr/bin/env chmod 700 /tmp/git-ssh-99ca431ab374716d9cb7.sh as ec2-user@35.88.151.149
+ DEBUG [5be76c60] Command: /usr/bin/env chmod 700 /tmp/git-ssh-99ca431ab374716d9cb7.sh
+  INFO [5be76c60] Finished in 0.545 seconds with exit status 0 (successful).
+  INFO [7bbe8e02] Running /usr/bin/env git ls-remote git@github.com:louise-x/learn-git.git HEAD as ec2-user@35.88.151.149
+ DEBUG [7bbe8e02] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-99ca431ab374716d9cb7.sh" ; /usr/bin/env git ls-remote git@github.com:louise-x/learn-git.git HEAD )
+ DEBUG [7bbe8e02] 	63b04e0b9940ad3a078b359d11f4f9506884b528	HEAD
+  INFO [7bbe8e02] Finished in 1.958 seconds with exit status 0 (successful).
+  INFO [67d05109] Running /usr/bin/env mkdir -p /var/www/my-test/shared /var/www/my-test/releases as ec2-user@35.88.151.149
+ DEBUG [67d05109] Command: /usr/bin/env mkdir -p /var/www/my-test/shared /var/www/my-test/releases
+  INFO [67d05109] Finished in 0.544 seconds with exit status 0 (successful).
+  INFO [62aee047] Running /usr/bin/env mkdir -p /var/www/my-test/shared/public/assets as ec2-user@35.88.151.149
+ DEBUG [62aee047] Command: /usr/bin/env mkdir -p /var/www/my-test/shared/public/assets
+  INFO [62aee047] Finished in 0.588 seconds with exit status 0 (successful).
+ DEBUG [688165e9] Running [ -f /var/www/my-test/shared/puma.rb ] as ec2-user@35.88.151.149
+ DEBUG [688165e9] Command: [ -f /var/www/my-test/shared/puma.rb ]
+ DEBUG [688165e9] Finished in 0.540 seconds with exit status 0 (successful).
+ DEBUG [a3754c9d] Running [ -f /var/www/my-test/current/REVISION ] as ec2-user@35.88.151.149
+ DEBUG [a3754c9d] Command: [ -f /var/www/my-test/current/REVISION ]
+ DEBUG [a3754c9d] Finished in 0.582 seconds with exit status 1 (failed).
+ DEBUG [7c746666] Running [ -f /var/www/my-test/repo/HEAD ] as ec2-user@35.88.151.149
+ DEBUG [7c746666] Command: [ -f /var/www/my-test/repo/HEAD ]
+ DEBUG [7c746666] Finished in 0.543 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/my-test/repo
+ DEBUG [6130c41b] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [6130c41b] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [6130c41b] Finished in 0.581 seconds with exit status 0 (successful).
+  INFO [561f8b86] Running /usr/bin/env git remote set-url origin git@github.com:louise-x/learn-git.git as ec2-user@35.88.151.149
+ DEBUG [561f8b86] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-99ca431ab374716d9cb7.sh" ; /usr/bin/env git remote set-url origin git@github.com:louise-x/learn-git.git )
+  INFO [561f8b86] Finished in 0.545 seconds with exit status 0 (successful).
+  INFO [b09af37f] Running /usr/bin/env git remote update --prune as ec2-user@35.88.151.149
+ DEBUG [b09af37f] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-99ca431ab374716d9cb7.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [b09af37f] 	Fetching origin
+ DEBUG [b09af37f] 	
+  INFO [b09af37f] Finished in 2.304 seconds with exit status 0 (successful).
+ DEBUG [f8e22a8c] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [f8e22a8c] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [f8e22a8c] Finished in 0.546 seconds with exit status 0 (successful).
+  INFO [9987d34f] Running /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010658 as ec2-user@35.88.151.149
+ DEBUG [9987d34f] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-99ca431ab374716d9cb7.sh" ; /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010658 )
+  INFO [9987d34f] Finished in 0.590 seconds with exit status 0 (successful).
+  INFO [c0bc22c3] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/my-test/releases/20211213010658 as ec2-user@35.88.151.149
+ DEBUG [c0bc22c3] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-99ca431ab374716d9cb7.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/my-test/releases/20211213010658 )
+  INFO [c0bc22c3] Finished in 0.556 seconds with exit status 0 (successful).
+ DEBUG [d350291b] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [d350291b] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [d350291b] Finished in 0.582 seconds with exit status 0 (successful).
+ DEBUG [c84b8bca] Running /usr/bin/env git rev-list --max-count=1 main as ec2-user@35.88.151.149
+ DEBUG [c84b8bca] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-99ca431ab374716d9cb7.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [c84b8bca] 	63b04e0b9940ad3a078b359d11f4f9506884b528
+ DEBUG [c84b8bca] 	
+ DEBUG [c84b8bca] Finished in 0.550 seconds with exit status 0 (successful).
+ DEBUG [3614e09a] Running if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [3614e09a] Command: if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi
+ DEBUG [3614e09a] Finished in 0.586 seconds with exit status 0 (successful).
+  INFO [44b019da] Running /usr/bin/env echo "63b04e0b9940ad3a078b359d11f4f9506884b528" > REVISION as ec2-user@35.88.151.149
+ DEBUG [44b019da] Command: cd /var/www/my-test/releases/20211213010658 && /usr/bin/env echo "63b04e0b9940ad3a078b359d11f4f9506884b528" > REVISION
+  INFO [44b019da] Finished in 0.545 seconds with exit status 0 (successful).
+  INFO [e95d870c] Running /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010658/public as ec2-user@35.88.151.149
+ DEBUG [e95d870c] Command: /usr/bin/env mkdir -p /var/www/my-test/releases/20211213010658/public
+  INFO [e95d870c] Finished in 0.582 seconds with exit status 0 (successful).
+ DEBUG [5e82c89e] Running [ -L /var/www/my-test/releases/20211213010658/public/assets ] as ec2-user@35.88.151.149
+ DEBUG [5e82c89e] Command: [ -L /var/www/my-test/releases/20211213010658/public/assets ]
+ DEBUG [5e82c89e] Finished in 0.540 seconds with exit status 1 (failed).
+ DEBUG [debea49a] Running [ -d /var/www/my-test/releases/20211213010658/public/assets ] as ec2-user@35.88.151.149
+ DEBUG [debea49a] Command: [ -d /var/www/my-test/releases/20211213010658/public/assets ]
+ DEBUG [debea49a] Finished in 0.588 seconds with exit status 1 (failed).
+  INFO [4d2ef102] Running /usr/bin/env ln -s /var/www/my-test/shared/public/assets /var/www/my-test/releases/20211213010658/public/assets as ec2-user@35.88.151.149
+ DEBUG [4d2ef102] Command: /usr/bin/env ln -s /var/www/my-test/shared/public/assets /var/www/my-test/releases/20211213010658/public/assets
+  INFO [4d2ef102] Finished in 0.547 seconds with exit status 0 (successful).
+ DEBUG [ba14fa21] Running if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [ba14fa21] Command: if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi
+ DEBUG [ba14fa21] Finished in 0.585 seconds with exit status 0 (successful).
+  INFO [28f28aad] Running ~/.rvm/bin/rvm default do bundle config --local deployment true as ec2-user@35.88.151.149
+ DEBUG [28f28aad] Command: cd /var/www/my-test/releases/20211213010658 && ~/.rvm/bin/rvm default do bundle config --local deployment true
+  INFO [28f28aad] Finished in 1.143 seconds with exit status 0 (successful).
+  INFO [16a21d53] Running ~/.rvm/bin/rvm default do bundle config --local path /var/www/my-test/shared/bundle as ec2-user@35.88.151.149
+ DEBUG [16a21d53] Command: cd /var/www/my-test/releases/20211213010658 && ~/.rvm/bin/rvm default do bundle config --local path /var/www/my-test/shared/bundle
+  INFO [16a21d53] Finished in 1.174 seconds with exit status 0 (successful).
+  INFO [8f19e70e] Running ~/.rvm/bin/rvm default do bundle config --local without development:test as ec2-user@35.88.151.149
+ DEBUG [8f19e70e] Command: cd /var/www/my-test/releases/20211213010658 && ~/.rvm/bin/rvm default do bundle config --local without development:test
+  INFO [8f19e70e] Finished in 1.150 seconds with exit status 0 (successful).
+ DEBUG [3e9fa17e] Running if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [3e9fa17e] Command: if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi
+ DEBUG [3e9fa17e] Finished in 0.592 seconds with exit status 0 (successful).
+ DEBUG [62f65aaf] Running ~/.rvm/bin/rvm default do bundle check as ec2-user@35.88.151.149
+ DEBUG [62f65aaf] Command: cd /var/www/my-test/releases/20211213010658 && ~/.rvm/bin/rvm default do bundle check
+ DEBUG [62f65aaf] 	[31mCannot write a changed lockfile while frozen.[0m
+ DEBUG [62f65aaf] 	
+ DEBUG [62f65aaf] 	The Gemfile's dependencies are satisfied
+ DEBUG [62f65aaf] 	
+ DEBUG [62f65aaf] Finished in 1.232 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+ DEBUG [e4f3ce4b] Running if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [e4f3ce4b] Command: if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi
+ DEBUG [e4f3ce4b] Finished in 0.584 seconds with exit status 0 (successful).
+  INFO [9e9d5f58] Running /usr/bin/env yarn install --production as ec2-user@35.88.151.149
+ DEBUG [9e9d5f58] Command: cd /var/www/my-test/releases/20211213010658 && /usr/bin/env yarn install --production
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[1myarn install v1.22.15[22m
+ DEBUG [9e9d5f58] 	
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[34minfo[39m No lockfile found.
+ DEBUG [9e9d5f58] 	
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[2m[1/4][22m Resolving packages...
+ DEBUG [9e9d5f58] 	
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	⠁ 
+ DEBUG [9e9d5f58] 	[0K
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[2m[2/4][22m Fetching packages...
+ DEBUG [9e9d5f58] 	
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[2m[3/4][22m Linking dependencies...
+ DEBUG [9e9d5f58] 	
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[2m[4/4][22m Building fresh packages...
+ DEBUG [9e9d5f58] 	
+ DEBUG [9e9d5f58] 	[1B
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	[32msuccess[39m Saved lockfile.
+ DEBUG [9e9d5f58] 	
+ DEBUG [9e9d5f58] 	[2K
+ DEBUG [9e9d5f58] 	[1G
+ DEBUG [9e9d5f58] 	Done in 0.07s.
+ DEBUG [9e9d5f58] 	
+  INFO [9e9d5f58] Finished in 1.497 seconds with exit status 0 (successful).
+ DEBUG [1fffeb14] Running if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [1fffeb14] Command: if test ! -d /var/www/my-test/releases/20211213010658; then echo "Directory does not exist '/var/www/my-test/releases/20211213010658'" 1>&2; false; fi
+ DEBUG [1fffeb14] Finished in 0.584 seconds with exit status 0 (successful).
+  INFO [3cda9df6] Running ~/.rvm/bin/rvm default do bundle exec rake assets:precompile as ec2-user@35.88.151.149
+ DEBUG [3cda9df6] Command: cd /var/www/my-test/releases/20211213010658 && ( export RAILS_ENV="production" RAILS_GROUPS="" ; ~/.rvm/bin/rvm default do bundle exec rake assets:precompile )
+ DEBUG [3cda9df6] 	[31mYou are trying to install in deployment mode after changing
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	your Gemfile. Run `bundle install` elsewhere and add the
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	updated Gemfile.lock to version control.
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	If this is a development machine, remove the /var/www/my-test/releases/20211213010658/Gemfile freeze 
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	by running `bundle config unset deployment`.
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	The dependencies in your gemfile changed
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	You have added to the Gemfile:
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	* capistrano3-rvm
+ DEBUG [3cda9df6] 	
+ DEBUG [3cda9df6] 	[0m
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-12-13 09:10:52 +0800 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [ce799151] Running [ -d ~/.rvm ] as ec2-user@35.88.151.149
+ DEBUG [ce799151] Command: [ -d ~/.rvm ]
+ DEBUG [ce799151] Finished in 2.420 seconds with exit status 0 (successful).
+ DEBUG [75232780] Running ~/.rvm/bin/rvm version as ec2-user@35.88.151.149
+ DEBUG [75232780] Command: ~/.rvm/bin/rvm version
+ DEBUG [75232780] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [75232780] 	
+ DEBUG [75232780] Finished in 0.722 seconds with exit status 0 (successful).
+ DEBUG [0943076e] Running ~/.rvm/bin/rvm current as ec2-user@35.88.151.149
+ DEBUG [0943076e] Command: ~/.rvm/bin/rvm current
+ DEBUG [0943076e] 	ruby-2.6.6
+ DEBUG [0943076e] 	
+ DEBUG [0943076e] Finished in 0.763 seconds with exit status 0 (successful).
+ DEBUG [0f0de0c9] Running ~/.rvm/bin/rvm default do ruby --version as ec2-user@35.88.151.149
+ DEBUG [0f0de0c9] Command: ~/.rvm/bin/rvm default do ruby --version
+ DEBUG [0f0de0c9] 	ruby 2.6.6p146 (2020-03-31 revision 67876) [x86_64-linux]
+ DEBUG [0f0de0c9] 	
+ DEBUG [0f0de0c9] Finished in 0.889 seconds with exit status 0 (successful).
+  INFO [86df81bc] Running /usr/bin/env mkdir -p /tmp as ec2-user@35.88.151.149
+ DEBUG [86df81bc] Command: /usr/bin/env mkdir -p /tmp
+  INFO [86df81bc] Finished in 0.566 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-6b13e35de3376a50b06f.sh 0.0%
+  INFO Uploading /tmp/git-ssh-6b13e35de3376a50b06f.sh 100.0%
+  INFO [16239dd4] Running /usr/bin/env chmod 700 /tmp/git-ssh-6b13e35de3376a50b06f.sh as ec2-user@35.88.151.149
+ DEBUG [16239dd4] Command: /usr/bin/env chmod 700 /tmp/git-ssh-6b13e35de3376a50b06f.sh
+  INFO [16239dd4] Finished in 0.523 seconds with exit status 0 (successful).
+  INFO [403f7c31] Running /usr/bin/env git ls-remote git@github.com:louise-x/learn-git.git HEAD as ec2-user@35.88.151.149
+ DEBUG [403f7c31] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6b13e35de3376a50b06f.sh" ; /usr/bin/env git ls-remote git@github.com:louise-x/learn-git.git HEAD )
+ DEBUG [403f7c31] 	63b04e0b9940ad3a078b359d11f4f9506884b528	HEAD
+  INFO [403f7c31] Finished in 2.066 seconds with exit status 0 (successful).
+  INFO [b7a39fe9] Running /usr/bin/env mkdir -p /var/www/my-test/shared /var/www/my-test/releases as ec2-user@35.88.151.149
+ DEBUG [b7a39fe9] Command: /usr/bin/env mkdir -p /var/www/my-test/shared /var/www/my-test/releases
+  INFO [b7a39fe9] Finished in 0.521 seconds with exit status 0 (successful).
+  INFO [4526ab43] Running /usr/bin/env mkdir -p /var/www/my-test/shared/public/assets as ec2-user@35.88.151.149
+ DEBUG [4526ab43] Command: /usr/bin/env mkdir -p /var/www/my-test/shared/public/assets
+  INFO [4526ab43] Finished in 0.562 seconds with exit status 0 (successful).
+ DEBUG [ea1dcbc4] Running [ -f /var/www/my-test/shared/puma.rb ] as ec2-user@35.88.151.149
+ DEBUG [ea1dcbc4] Command: [ -f /var/www/my-test/shared/puma.rb ]
+ DEBUG [ea1dcbc4] Finished in 0.521 seconds with exit status 0 (successful).
+ DEBUG [55a973a2] Running [ -f /var/www/my-test/current/REVISION ] as ec2-user@35.88.151.149
+ DEBUG [55a973a2] Command: [ -f /var/www/my-test/current/REVISION ]
+ DEBUG [55a973a2] Finished in 0.561 seconds with exit status 1 (failed).
+ DEBUG [d40e3336] Running [ -f /var/www/my-test/repo/HEAD ] as ec2-user@35.88.151.149
+ DEBUG [d40e3336] Command: [ -f /var/www/my-test/repo/HEAD ]
+ DEBUG [d40e3336] Finished in 0.521 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/my-test/repo
+ DEBUG [82a5457d] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [82a5457d] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [82a5457d] Finished in 0.566 seconds with exit status 0 (successful).
+  INFO [1f0b23d3] Running /usr/bin/env git remote set-url origin git@github.com:louise-x/learn-git.git as ec2-user@35.88.151.149
+ DEBUG [1f0b23d3] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6b13e35de3376a50b06f.sh" ; /usr/bin/env git remote set-url origin git@github.com:louise-x/learn-git.git )
+  INFO [1f0b23d3] Finished in 0.525 seconds with exit status 0 (successful).
+  INFO [bb7b8ccc] Running /usr/bin/env git remote update --prune as ec2-user@35.88.151.149
+ DEBUG [bb7b8ccc] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6b13e35de3376a50b06f.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [bb7b8ccc] 	Fetching origin
+ DEBUG [bb7b8ccc] 	
+  INFO [bb7b8ccc] Finished in 1.915 seconds with exit status 0 (successful).
+ DEBUG [78232a4c] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [78232a4c] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [78232a4c] Finished in 0.520 seconds with exit status 0 (successful).
+  INFO [99a04f59] Running /usr/bin/env mkdir -p /var/www/my-test/releases/20211213011104 as ec2-user@35.88.151.149
+ DEBUG [99a04f59] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6b13e35de3376a50b06f.sh" ; /usr/bin/env mkdir -p /var/www/my-test/releases/20211213011104 )
+  INFO [99a04f59] Finished in 0.568 seconds with exit status 0 (successful).
+  INFO [d1ed0d9b] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/my-test/releases/20211213011104 as ec2-user@35.88.151.149
+ DEBUG [d1ed0d9b] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6b13e35de3376a50b06f.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/my-test/releases/20211213011104 )
+  INFO [d1ed0d9b] Finished in 0.534 seconds with exit status 0 (successful).
+ DEBUG [d16041f2] Running if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [d16041f2] Command: if test ! -d /var/www/my-test/repo; then echo "Directory does not exist '/var/www/my-test/repo'" 1>&2; false; fi
+ DEBUG [d16041f2] Finished in 0.560 seconds with exit status 0 (successful).
+ DEBUG [5f7a5958] Running /usr/bin/env git rev-list --max-count=1 main as ec2-user@35.88.151.149
+ DEBUG [5f7a5958] Command: cd /var/www/my-test/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6b13e35de3376a50b06f.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [5f7a5958] 	63b04e0b9940ad3a078b359d11f4f9506884b528
+ DEBUG [5f7a5958] 	
+ DEBUG [5f7a5958] Finished in 0.528 seconds with exit status 0 (successful).
+ DEBUG [fcf2a7dc] Running if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [fcf2a7dc] Command: if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi
+ DEBUG [fcf2a7dc] Finished in 0.563 seconds with exit status 0 (successful).
+  INFO [acca4d15] Running /usr/bin/env echo "63b04e0b9940ad3a078b359d11f4f9506884b528" > REVISION as ec2-user@35.88.151.149
+ DEBUG [acca4d15] Command: cd /var/www/my-test/releases/20211213011104 && /usr/bin/env echo "63b04e0b9940ad3a078b359d11f4f9506884b528" > REVISION
+  INFO [acca4d15] Finished in 0.525 seconds with exit status 0 (successful).
+  INFO [077a08bb] Running /usr/bin/env mkdir -p /var/www/my-test/releases/20211213011104/public as ec2-user@35.88.151.149
+ DEBUG [077a08bb] Command: /usr/bin/env mkdir -p /var/www/my-test/releases/20211213011104/public
+  INFO [077a08bb] Finished in 0.567 seconds with exit status 0 (successful).
+ DEBUG [757d4b98] Running [ -L /var/www/my-test/releases/20211213011104/public/assets ] as ec2-user@35.88.151.149
+ DEBUG [757d4b98] Command: [ -L /var/www/my-test/releases/20211213011104/public/assets ]
+ DEBUG [757d4b98] Finished in 0.521 seconds with exit status 1 (failed).
+ DEBUG [75930c4e] Running [ -d /var/www/my-test/releases/20211213011104/public/assets ] as ec2-user@35.88.151.149
+ DEBUG [75930c4e] Command: [ -d /var/www/my-test/releases/20211213011104/public/assets ]
+ DEBUG [75930c4e] Finished in 0.562 seconds with exit status 1 (failed).
+  INFO [ee88e20a] Running /usr/bin/env ln -s /var/www/my-test/shared/public/assets /var/www/my-test/releases/20211213011104/public/assets as ec2-user@35.88.151.149
+ DEBUG [ee88e20a] Command: /usr/bin/env ln -s /var/www/my-test/shared/public/assets /var/www/my-test/releases/20211213011104/public/assets
+  INFO [ee88e20a] Finished in 0.524 seconds with exit status 0 (successful).
+ DEBUG [214be680] Running if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [214be680] Command: if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi
+ DEBUG [214be680] Finished in 0.564 seconds with exit status 0 (successful).
+  INFO [75e5f8d4] Running ~/.rvm/bin/rvm default do bundle config --local deployment true as ec2-user@35.88.151.149
+ DEBUG [75e5f8d4] Command: cd /var/www/my-test/releases/20211213011104 && ~/.rvm/bin/rvm default do bundle config --local deployment true
+  INFO [75e5f8d4] Finished in 1.121 seconds with exit status 0 (successful).
+  INFO [a4a9dd84] Running ~/.rvm/bin/rvm default do bundle config --local path /var/www/my-test/shared/bundle as ec2-user@35.88.151.149
+ DEBUG [a4a9dd84] Command: cd /var/www/my-test/releases/20211213011104 && ~/.rvm/bin/rvm default do bundle config --local path /var/www/my-test/shared/bundle
+  INFO [a4a9dd84] Finished in 1.160 seconds with exit status 0 (successful).
+  INFO [b229c496] Running ~/.rvm/bin/rvm default do bundle config --local without development:test as ec2-user@35.88.151.149
+ DEBUG [b229c496] Command: cd /var/www/my-test/releases/20211213011104 && ~/.rvm/bin/rvm default do bundle config --local without development:test
+  INFO [b229c496] Finished in 1.111 seconds with exit status 0 (successful).
+ DEBUG [38e98431] Running if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [38e98431] Command: if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi
+ DEBUG [38e98431] Finished in 0.557 seconds with exit status 0 (successful).
+ DEBUG [72242e88] Running ~/.rvm/bin/rvm default do bundle check as ec2-user@35.88.151.149
+ DEBUG [72242e88] Command: cd /var/www/my-test/releases/20211213011104 && ~/.rvm/bin/rvm default do bundle check
+ DEBUG [72242e88] 	[31mCannot write a changed lockfile while frozen.[0m
+ DEBUG [72242e88] 	
+ DEBUG [72242e88] 	The Gemfile's dependencies are satisfied
+ DEBUG [72242e88] 	
+ DEBUG [72242e88] Finished in 1.218 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+ DEBUG [7226f5a6] Running if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [7226f5a6] Command: if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi
+ DEBUG [7226f5a6] Finished in 0.562 seconds with exit status 0 (successful).
+  INFO [13d10a45] Running /usr/bin/env yarn install --production as ec2-user@35.88.151.149
+ DEBUG [13d10a45] Command: cd /var/www/my-test/releases/20211213011104 && /usr/bin/env yarn install --production
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[1myarn install v1.22.15[22m
+ DEBUG [13d10a45] 	
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[34minfo[39m No lockfile found.
+ DEBUG [13d10a45] 	
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[2m[1/4][22m Resolving packages...
+ DEBUG [13d10a45] 	
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	⠁ 
+ DEBUG [13d10a45] 	[0K
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[2m[2/4][22m Fetching packages...
+ DEBUG [13d10a45] 	
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[2m[3/4][22m Linking dependencies...
+ DEBUG [13d10a45] 	
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[2m[4/4][22m Building fresh packages...
+ DEBUG [13d10a45] 	
+ DEBUG [13d10a45] 	[1B
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	[32msuccess[39m Saved lockfile.
+ DEBUG [13d10a45] 	
+ DEBUG [13d10a45] 	[2K
+ DEBUG [13d10a45] 	[1G
+ DEBUG [13d10a45] 	Done in 0.07s.
+ DEBUG [13d10a45] 	
+  INFO [13d10a45] Finished in 1.458 seconds with exit status 0 (successful).
+ DEBUG [30d8fabe] Running if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi as ec2-user@35.88.151.149
+ DEBUG [30d8fabe] Command: if test ! -d /var/www/my-test/releases/20211213011104; then echo "Directory does not exist '/var/www/my-test/releases/20211213011104'" 1>&2; false; fi
+ DEBUG [30d8fabe] Finished in 0.563 seconds with exit status 0 (successful).
+  INFO [8c2e870d] Running ~/.rvm/bin/rvm default do bundle exec rake assets:precompile as ec2-user@35.88.151.149
+ DEBUG [8c2e870d] Command: cd /var/www/my-test/releases/20211213011104 && ( export RAILS_ENV="production" RAILS_GROUPS="" ; ~/.rvm/bin/rvm default do bundle exec rake assets:precompile )
+ DEBUG [8c2e870d] 	[31mYou are trying to install in deployment mode after changing
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	your Gemfile. Run `bundle install` elsewhere and add the
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	updated Gemfile.lock to version control.
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	If this is a development machine, remove the /var/www/my-test/releases/20211213011104/Gemfile freeze 
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	by running `bundle config unset deployment`.
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	The dependencies in your gemfile changed
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	You have added to the Gemfile:
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	* capistrano3-rvm
+ DEBUG [8c2e870d] 	
+ DEBUG [8c2e870d] 	[0m
