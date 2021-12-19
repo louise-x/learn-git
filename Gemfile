@@ -19,10 +19,16 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# add by practice
 gem 'bootsnap', require: false
 gem 'dotenv-rails', '~> 2.7.5', require: 'dotenv/rails-now'
 gem 'active_model_serializers', '~> 0.10.9'
 gem 'makara'
+gem 'minitest', '5.11.3'
+gem 'minitest-reporters', '1.3.8'
+gem 'guard'#, '2.15.0'
+gem 'guard-minitest'#, '2.4.6'
+
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
