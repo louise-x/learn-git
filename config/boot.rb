@@ -10,5 +10,5 @@ require 'bootsnap/setup'
 app_dir = "/var/www/my-test"
 shared_dir = "#{app_dir}/shared"
 Bootsnap.setup(
-    cache_dir: '#{shared_dir}/tmp/cache'
+    cache_dir: "#{shared_dir}/tmp/cache"
 )
