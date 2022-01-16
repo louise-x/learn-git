@@ -107,7 +107,7 @@ end
     puts "found access no more 10min ago: #{files}"
   end
 
-endg
+end
 # Default branch is :main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
