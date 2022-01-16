@@ -40,14 +40,14 @@ end
 
 namespace :deploy do
  desc "Make sure local git is in sync with remote."
- task :check_revision do
- on roles(:app) do
- unless `git rev-parse HEAD` == `git rev-parse origin/main`
- puts "WARNING: HEAD is not the same as origin/main"
- puts "Run `git push` to sync changes."
- exit
- end
- end
+  task :check_revision do
+    on roles(:app) do
+      unless `git rev-parse HEAD` == `git rev-parse origin/main`
+      puts "WARNING: HEAD is not the same as origin/main"
+      puts "Run `git push` to sync changes."
+      exit
+    end
+  end
  end
  
  desc "Initial Deploy"
@@ -58,18 +58,33 @@ namespace :deploy do
  end
  end
  
+ desc "cleanup application"
+ task :cleanup do
+   on roles(:app) do
+   before "deploy:cleanup", "bootsnap:clean_cache"
+ end
+end
  
  desc "Restart application"
- task :restart do
- on roles(:app), in: :sequence, wait: 5 do
- invoke "puma:restart"
- end
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+    invoke "puma:restart"
+  end
  end
  
  before :starting, :check_revision
  after :finishing, :compile_assets
  after :finishing, :cleanup
  after :finishing, :restart
+end
+
+namespace :bootsnap do
+  desc "clean bootsnap cache............................"
+  task :clean_cache do
+    on roles(:app) do
+    puts "this is a test"
+  end
+ end
 end
 # Default branch is :main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
