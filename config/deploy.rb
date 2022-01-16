@@ -24,6 +24,8 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, false
 set :deploy_to, "/var/www/my-test"
 
+append :linked_dirs, 'log', 'tmp/cache'
+
 namespace :puma do
  desc "Create Directories for Puma Pids and Socket"
  task :make_dirs do
