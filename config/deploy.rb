@@ -61,7 +61,7 @@ namespace :deploy do
  desc "cleanup application"
  task :cleanup do
    on roles(:app) do
-   before "deploy:cleanup"
+   before "deploy:cleanup", "bootsnap:clean_cache"
    invoke "bootsnap:clean_cache"
  end
 end
