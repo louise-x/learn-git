@@ -80,12 +80,32 @@ end
 end
 
 namespace :bootsnap do
-  desc "clean bootsnap cache............................"
+  desc "clean bootsnap cach"
   task :clean_cache do
     on roles(:app) do
-    puts "this is a test"
+    puts "this is a test............................"
+    ruby_dir_with_lazy "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache"
   end
- end
+end
+ 
+  def ruby_dir_with_lazy folder
+    now = Time.now
+    files = []
+    puts "--- address the folder : #{folder}"
+    Dir.glob("#{folder}/**/*").lazy.each do |file|
+      puts "--- checking #{file}"
+      if File.file? file
+        atime = File.atime(file)
+        delta = now - atime
+        puts "delta is ....#{delta}"
+        if delta > 600
+          files << file
+        end
+      end
+    end
+    puts "found access no more 10min ago: #{files}"
+  end
+
 end
 # Default branch is :main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
