@@ -58,13 +58,12 @@ namespace :deploy do
  end
  end
  
- desc "cleanup application"
- task :cleanup do
-   on roles(:app) do
-   before "deploy:cleanup", "bootsnap:clean_cache"
-   invoke "bootsnap:clean_cache"
- end
-end
+#  desc "cleanup application"
+#  task :clean_cache do
+#    on roles(:app) do
+#    invoke "bootsnap:clean_cache"
+#  end
+# end
  
  desc "Restart application"
   task :restart do
@@ -77,6 +76,7 @@ end
  after :finishing, :compile_assets
  after :finishing, :cleanup
  after :finishing, :restart
+ after :cleanup, "bootsnap:clean_cache"
 end
 
 namespace :bootsnap do
@@ -84,7 +84,8 @@ namespace :bootsnap do
   task :clean_cache do
     on roles(:app) do
     puts "this is a test............................"
-    ruby_dir_with_lazy "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache"
+    # execute ruby_dir_with_lazy, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00"
+    execute :ruby, "/var/www/my-test/current/cleanup.rb"
   end
 end
  
@@ -106,7 +107,7 @@ end
     puts "found access no more 10min ago: #{files}"
   end
 
-end
+endg
 # Default branch is :main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
