@@ -84,8 +84,12 @@ namespace :bootsnap do
   task :clean_cache do
     on roles(:app) do
     puts "this is a test............................"
-    # execute ruby_dir_with_lazy, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00"
-    execute :ruby, "/var/www/my-test/current/cleanup.rb"
+    # execute whruby_dir_with_lazy, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00"
+    execute :bash, "-c /home/ec2-user/.rvm/rubies/ruby-2.6.6/bin/ruby /var/www/my-test/current/cleanup.rb"
+    # execute :find, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00 -atime -1 -type f"
+    # puts capture("find '/var/www/my-test/shared/tmp/cache/bootsnap/' -maxdepth 5 -atime +1 -type f  | xargs -I '{}' -0 cp '{}' /tmp/test ")
+    # sudo(:find, "'/var/www/my-test/shared/tmp/cache/bootsnap/' -maxdepth 6 -atime -1 -type f  | xargs -I '{}' -0 cp '{}' /tmp/test ")
+    # execute :find, "/var/www/my-test/shared/tmp/cache/bootsnap -maxdepth 4 -atime -1 -type f -exec cp \{\} '/tmp/test/' "
   end
 end
  
