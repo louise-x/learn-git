@@ -79,16 +79,29 @@ namespace :deploy do
  after :cleanup, "bootsnap:clean_cache"
 end
 
+set :noaccess_interval, -1
+
 namespace :bootsnap do
   desc "clean bootsnap cach"
   task :clean_cache do
     on roles(:app) do
-    puts "this is a test............................"
-    # execute whruby_dir_with_lazy, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00"
-    execute :bash, "-c /home/ec2-user/.rvm/rubies/ruby-2.6.6/bin/ruby /var/www/my-test/current/cleanup.rb"
-    # execute :find, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00 -atime -1 -type f"
-    # puts capture("find '/var/www/my-test/shared/tmp/cache/bootsnap/' -maxdepth 5 -atime +1 -type f  | xargs -I '{}' -0 cp '{}' /tmp/test ")
-    # sudo(:find, "'/var/www/my-test/shared/tmp/cache/bootsnap/' -maxdepth 6 -atime -1 -type f  | xargs -I '{}' -0 cp '{}' /tmp/test ")
+      sudo(:haha, "sth go waong") rescue true
+    # puts "this is a test............................"
+    # bootsnap_compile_cache_dir = "#{fetch(:deploy_to)}/shared/tmp/cache/bootsnap"
+    # tmp_purge_folder = "/tmp/test"
+    # puts "creating tmp purge dir...."
+    # execute(:mkdir, "-p #{tmp_purge_folder}")
+    # # execute whruby_dir_with_lazy, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00"
+    # # execute :bash, "-c /home/ec2-user/.rvm/rubies/ruby-2.6.6/bin/ruby /var/www/my-test/current/cleanup.rb"
+    # # execute :find, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00 -atime -1 -type f"
+    # # puts capture("find '/var/www/my-test/shared/tmp/cache/bootsnap/' -maxdepth 5 -atime +1 -type f  | xargs -I '{}' -0 cp '{}' /tmp/test ")
+    # execute(:find, 
+    #      "#{bootsnap_compile_cache_dir} -maxdepth 3 -atime #{fetch(:noaccess_interval)} -type f -print0 "\
+    #      " | xargs -I '{}' -0 cp '{}' #{tmp_purge_folder} "
+    #      )
+    # file_counts = capture("ls  #{tmp_purge_folder} | wc -l")
+    # puts "it is going to purge #{file_counts} files"
+    # execute(:rm, "-r  #{tmp_purge_folder}") rescue true
     # execute :find, "/var/www/my-test/shared/tmp/cache/bootsnap -maxdepth 4 -atime -1 -type f -exec cp \{\} '/tmp/test/' "
   end
 end

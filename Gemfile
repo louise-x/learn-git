@@ -30,6 +30,7 @@ gem 'guard'#, '2.15.0'
 gem 'guard-minitest'#, '2.4.6'
 gem 'bcrypt', '3.1.13'
 
+gem 'capistrano-locally', require: false
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

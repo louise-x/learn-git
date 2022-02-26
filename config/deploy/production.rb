@@ -10,7 +10,7 @@
 set :stage, :production
 set :rails_env, :production
 set :branch, "main"
-server "34.221.166.210", user: "ec2-user", roles: %w{web app db}
+server "54.185.248.105", user: "ec2-user", roles: %w{web app db}
 
 # role-based syntax
 # ==================

@@ -37,6 +37,7 @@ install_plugin Capistrano::SCM::Git
 require "capistrano/rails"
 require "capistrano/yarn"
 require "capistrano/rvm"
+require 'capistrano/locally'
 
 require "capistrano/puma"
 install_plugin Capistrano::Puma
