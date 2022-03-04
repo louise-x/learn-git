@@ -8,6 +8,7 @@
 # Test binary, built with `go test -c`
 *.test
 
+.keep
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
@@ -19,3 +20,5 @@ public
 *.log
 
 .bundle/
+# Ignore encrypted secrets key file.
+config/secrets.yml.key

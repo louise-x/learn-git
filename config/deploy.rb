@@ -24,39 +24,44 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, false
 set :deploy_to, "/var/www/my-test"
 
-append :linked_dirs, 'log', 'tmp/cache'
+append :linked_dirs, 'log'
+
+append :linked_files, 'config/database.yml',
+                      'config/secrets.yml',
+                      'config/secrets.yml.key'
+
 
 namespace :puma do
- desc "Create Directories for Puma Pids and Socket"
- task :make_dirs do
- on roles(:app) do
- execute "mkdir #{shared_path}/tmp/sockets -p"
- execute "mkdir #{shared_path}/tmp/pids -p"
- end
- end
+  desc "Create Directories for Puma Pids and Socket"
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
+    end
+  end
  
- before :start, :make_dirs
+  before :start, :make_dirs
 end
 
 namespace :deploy do
- desc "Make sure local git is in sync with remote."
+  desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
       unless `git rev-parse HEAD` == `git rev-parse origin/main`
       puts "WARNING: HEAD is not the same as origin/main"
       puts "Run `git push` to sync changes."
       exit
+      end
     end
   end
- end
  
- desc "Initial Deploy"
- task :initial do
- on roles(:app) do
- before "deploy:restart", "puma:start"
- invoke "deploy"
- end
- end
+  desc "Initial Deploy"
+  task :initial do
+    on roles(:app) do
+      before "deploy:restart", "puma:start"
+      invoke "deploy"
+    end
+  end
  
 #  desc "cleanup application"
 #  task :clean_cache do
@@ -65,18 +70,18 @@ namespace :deploy do
 #  end
 # end
  
- desc "Restart application"
+  desc "Restart application"
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-    invoke "puma:restart"
+      invoke "puma:restart"
+    end
   end
- end
  
- before :starting, :check_revision
- after :finishing, :compile_assets
- after :finishing, :cleanup
- after :finishing, :restart
- after :cleanup, "bootsnap:clean_cache"
+  before :starting, :check_revision
+  after :finishing, :compile_assets
+  after :finishing, :cleanup
+  after :finishing, :restart
+  after :cleanup, "bootsnap:clean_cache"
 end
 
 set :noaccess_interval, -1
@@ -85,45 +90,9 @@ namespace :bootsnap do
   desc "clean bootsnap cach"
   task :clean_cache do
     on roles(:app) do
-      sudo(:haha, "sth go waong") rescue true
-    # puts "this is a test............................"
-    # bootsnap_compile_cache_dir = "#{fetch(:deploy_to)}/shared/tmp/cache/bootsnap"
-    # tmp_purge_folder = "/tmp/test"
-    # puts "creating tmp purge dir...."
-    # execute(:mkdir, "-p #{tmp_purge_folder}")
-    # # execute whruby_dir_with_lazy, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00"
-    # # execute :bash, "-c /home/ec2-user/.rvm/rubies/ruby-2.6.6/bin/ruby /var/www/my-test/current/cleanup.rb"
-    # # execute :find, "/var/www/my-test/shared/tmp/cache/bootsnap/compile-cache/00 -atime -1 -type f"
-    # # puts capture("find '/var/www/my-test/shared/tmp/cache/bootsnap/' -maxdepth 5 -atime +1 -type f  | xargs -I '{}' -0 cp '{}' /tmp/test ")
-    # execute(:find, 
-    #      "#{bootsnap_compile_cache_dir} -maxdepth 3 -atime #{fetch(:noaccess_interval)} -type f -print0 "\
-    #      " | xargs -I '{}' -0 cp '{}' #{tmp_purge_folder} "
-    #      )
-    # file_counts = capture("ls  #{tmp_purge_folder} | wc -l")
-    # puts "it is going to purge #{file_counts} files"
-    # execute(:rm, "-r  #{tmp_purge_folder}") rescue true
-    # execute :find, "/var/www/my-test/shared/tmp/cache/bootsnap -maxdepth 4 -atime -1 -type f -exec cp \{\} '/tmp/test/' "
-  end
-end
- 
-  def ruby_dir_with_lazy folder
-    now = Time.now
-    files = []
-    puts "--- address the folder : #{folder}"
-    Dir.glob("#{folder}/**/*").lazy.each do |file|
-      puts "--- checking #{file}"
-      if File.file? file
-        atime = File.atime(file)
-        delta = now - atime
-        puts "delta is ....#{delta}"
-        if delta > 600
-          files << file
-        end
-      end
+      sudo(:echo, "mock sth") rescue true
     end
-    puts "found access no more 10min ago: #{files}"
   end
-
 end
 # Default branch is :main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
