@@ -1,0 +1,15 @@
+name: Lint PR
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+
+jobs:
+  check_jira:
+    name: Validate PR title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: seferov/pr-lint-action@master
+        with:
+          title-regex: '^\[Test|-\d*( \d*)*\]\s*' # Must include jira ticket, e.g. WS-123 .
+          title-regex-flags: 'i' # Ignore case
+          error-message: 'Add Jira ID like Test-123 to your title!'
