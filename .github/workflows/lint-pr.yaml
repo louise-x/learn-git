@@ -2,12 +2,11 @@ name: Lint PR
 on:
   # pull_request:
   #   types: ['opened', 'edited', 'reopened', 'synchronize']
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-      - "main"
-    paths-ignore:
-      - '.github/**'
-      - '.circleci/**'
+      - main
     
 jobs:
   merge-main-back-to-trunk:
