@@ -1,15 +1,29 @@
 name: Lint PR
 on:
-  pull_request:
-    types: ['opened', 'edited', 'reopened', 'synchronize']
-
+  # pull_request:
+  #   types: ['opened', 'edited', 'reopened', 'synchronize']
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - '.github/**'
+      - '.circleci/**'
+    
 jobs:
-  check_jira:
-    name: Validate PR title
+  merge-main-back-to-trunk:
+    if: github.event.pull_request.merged == true
+    timeout-minutes: 2
     runs-on: ubuntu-latest
     steps:
-      - uses: seferov/pr-lint-action@master
-        with:
-          title-regex: '^\[Test|-\d*( \d*)*\]\s*' # Must include jira ticket, e.g. WS-123 .
-          title-regex-flags: 'i' # Ignore case
-          error-message: 'Add Jira ID like Test-123 to your title!'
+    - uses: actions/checkout@v2
+    - name: Set Git config
+      run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
+    - name: Merge main back to trunk
+      run: |
+          git fetch --unshallow
+          git checkout trunk
+          git pull origin main
+          git merge --no-ff main -m "Auto-merge main back to trunk"
+          git push
