@@ -26,7 +26,16 @@ jobs:
           git fetch origin main
           git merge -X ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
           git push -u origin HEAD --verbose -f 
-    - name: Update values.yaml
+update-values:
+  if: github.event.pull_request.merged == true
+  needs: merge-main-back-to-trunk
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: gitops
+    - name: Update deployment.yaml
       uses: fjogeleit/yaml-update-action@main
       with:
         valueFile: "version.yml"
