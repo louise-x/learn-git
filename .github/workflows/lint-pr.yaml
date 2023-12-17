@@ -21,8 +21,15 @@ jobs:
           git config --local user.name "Github Actions"
     - name: Merge main back to trunk
       run: |
-          git fetch --unshallow
-          git checkout trunk
-          git pull origin main
-          git merge --no-ff main -m "Auto-merge main back to trunk"
-          git push
+          git fetch origin main
+          git merge -X ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
+          git push -u origin HEAD --verbose -f 
+    - name: Update values.yaml
+      uses: fjogeleit/yaml-update-action@main
+      with:
+        valueFile: "version.yml"
+        propertyPath: "images.newTag"
+        value: "${{ github.ref }}-${{ github.sha }}"
+        message: "update image tag: ${{ github.sha }}"
+        createPR: false
+        title: "Update image tag"
