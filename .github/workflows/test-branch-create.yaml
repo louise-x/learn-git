@@ -1,0 +1,10 @@
+name: Actions-by-BranchCut
+
+on: create
+    
+jobs:
+  check-if-branchcut:
+    if: ${{ contains(github.ref, 'refs/heads/releases/') }}
+    steps:
+    - name: Set Git config
+      run: echo "branch cut occurred $github.ref"
