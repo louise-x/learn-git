@@ -44,3 +44,8 @@ jobs:
           message: "update image tag: ${{ github.sha }}"
           createPR: false
           title: "Update image tag"
+          targetBranch: gitops
+          masterBranchName: main
+          description: |
+            The ${{ env.ENV_LONG }} environment image will be updated to:
+            ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
