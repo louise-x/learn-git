@@ -38,10 +38,9 @@ update-values:
     - name: Update deployment.yaml
       uses: fjogeleit/yaml-update-action@main
       with:
-        valueFile: "kubernetes/${{ env.ENV_SHORT }}/deployment.yaml"
-        propertyPath: "spec.template.spec.containers[0].image"
-        value: "${{ env.AWS_ACCOUNT }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}:${{ github.sha }}"
-        message: "release deployment image tag: ${{ github.sha }}"
-        branch: ${{ github.event.pull_request.head.ref }}
+        valueFile: "version.yml"
+        propertyPath: "images.newTag"
+        value: "${{ github.ref }}-${{ github.sha }}"
+        message: "update image tag: ${{ github.sha }}"
         createPR: false
-        title: "Release ${{ env.ENV_LONG }} with deployment image tag"
+        title: "Update image tag"
