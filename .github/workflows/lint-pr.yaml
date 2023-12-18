@@ -25,7 +25,9 @@ jobs:
       run: |
           git fetch origin main
           git merge -X ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
-          git push -u origin HEAD --verbose -f 
+          git push -u origin HEAD --verbose -f
+          echo "git token $github.token"
+          echo "git ref is $github.ref"
   update-values:
     if: github.event.pull_request.merged == true
     needs: merge-main-back-to-trunk
@@ -44,7 +46,9 @@ jobs:
           message: "Update image tag: ${{ github.sha }}"
           createPR: false
           title: "Update image tag"
-          targetBranch: gitops
+          # targetBranch: gitops
+          branch: gitops
           masterBranchName: main
+          commitChange: true
           description: |
             Update image tag: ${{ github.sha }} Desc
