@@ -4,7 +4,7 @@ on: create
     
 jobs:
   check-if-branchcut:
-    # if: ${{ contains(github.ref, 'refs/heads/releases/') }}
+    if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
     runs-on: ubuntu-latest
     steps:
     - name: Set Git config
