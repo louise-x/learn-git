@@ -1,7 +1,7 @@
 name: Actions-by-BranchCut
 
-on: 
-  create
+on:
+  create:
     branches:
       - "release/R*"
 jobs:
