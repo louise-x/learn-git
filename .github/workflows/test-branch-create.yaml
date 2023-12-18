@@ -1,7 +1,9 @@
 name: Actions-by-BranchCut
 
-on: create
-    
+on: 
+  create
+    branches:
+      - "release/R*"
 jobs:
   check-if-branchcut:
     if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
