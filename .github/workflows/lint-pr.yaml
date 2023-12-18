@@ -39,13 +39,12 @@ jobs:
         uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: "version.yml"
-          propertyPath: "images.newTag"
+          propertyPath: "images[0].newTag"
           value: "${{ github.ref }}-${{ github.sha }}"
-          message: "update image tag: ${{ github.sha }}"
+          message: "Update image tag: ${{ github.sha }}"
           createPR: false
           title: "Update image tag"
           targetBranch: gitops
           masterBranchName: main
           description: |
-            The ${{ env.ENV_LONG }} environment image will be updated to:
-            ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+            Update image tag: ${{ github.sha }} Desc
