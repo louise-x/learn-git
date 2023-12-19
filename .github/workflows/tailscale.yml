@@ -12,11 +12,10 @@ jobs:
       with:
         oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
         oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-        tags: tag:ci
+        tags: tag:acls
     - name: Test Conn
       run: |
         ping -c 5 172.20.0.16
         echo "check chef infra conn"
         nc -zv 172.20.0.212 443
         curl -Ik https://chef-infra.dev.workstream.is
-        sleep 60
