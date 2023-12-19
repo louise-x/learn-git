@@ -13,6 +13,7 @@ jobs:
         authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
     - name: Test Conn
       run: |
+        ping -c 5 172.20.0.16
         nslookup chef-infra.dev.workstream.is
         curl -Ik  https://chef-infra.dev.workstream.is
         sleep 60
