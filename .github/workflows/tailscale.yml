@@ -14,8 +14,8 @@ jobs:
     - name: Test Conn
       run: |
         ping -c 5 172.20.0.16
-        echo "ping chef infra ip"
-        ping -c 5 172.20.0.212
-        nslookup chef-infra.dev.workstream.is
+        echo "check chef infra conn"
+        nc -zv 172.20.0.212 443
+        nslookup chef-infra.dev.workstream.is 172.20.0.2
         curl -Ik  https://chef-infra.dev.workstream.is
         sleep 60
