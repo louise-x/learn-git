@@ -1,0 +1,17 @@
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  deploy-via-tailscale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Tailscale
+      uses: tailscale/github-action@v2
+      with:
+        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+    - name: Test Conn
+      run: |
+        curl -Ik  https://chef-infra.dev.workstream.is
