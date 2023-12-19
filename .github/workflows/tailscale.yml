@@ -16,6 +16,5 @@ jobs:
         ping -c 5 172.20.0.16
         echo "check chef infra conn"
         nc -zv 172.20.0.212 443
-        nslookup chef-infra.dev.workstream.is 172.20.0.2
-        curl -Ik  https://chef-infra.dev.workstream.is
+        nslookup chat-svc.priv.dev.workstream.is
         sleep 60
