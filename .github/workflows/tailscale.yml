@@ -10,8 +10,7 @@ jobs:
     - name: Tailscale
       uses: tailscale/github-action@v2
       with:
-        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+        authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
     - name: Test Conn
       run: |
         curl -Ik  https://chef-infra.dev.workstream.is
