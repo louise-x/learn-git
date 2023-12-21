@@ -1,0 +1,13 @@
+name: Create PR
+on:
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+    branches:
+      - main
+jobs:
+  dummy-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: echo
+      run: echo "Passed"

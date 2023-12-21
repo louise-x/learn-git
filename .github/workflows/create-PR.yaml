@@ -6,7 +6,7 @@ on:
     paths:
       - 'prod/**'
 jobs:
-  merge-main-back-to-trunk:
+  create-PR:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
