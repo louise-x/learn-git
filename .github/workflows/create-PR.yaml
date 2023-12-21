@@ -1,7 +1,10 @@
 name: Create PR
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - gitops
+    paths:
+      - 'prod/**'
 jobs:
   merge-main-back-to-trunk:
     runs-on: ubuntu-latest
