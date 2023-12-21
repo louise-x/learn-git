@@ -26,10 +26,10 @@ jobs:
         pr_body: "Automated Pull Request"
         pr_reviewer: "louise-x"
         pr_assignee: "louise-x"
-    # - name: enable automerge
-    #   if: steps.open-pr.outputs.pr_number != ''
-    #   uses: peter-evans/enable-pull-request-automerge@v2
-    #   with:
-    #     token: ${{ github.token }}
-    #     pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
-    #     merge-method: merge
+    - name: enable automerge
+      if: steps.open-pr.outputs.pr_number != ''
+      uses: peter-evans/enable-pull-request-automerge@v2
+      with:
+        token: ${{ github.token }}
+        pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
+        merge-method: merge
