@@ -1,4 +1,4 @@
-name: Create PR
+name: DummyCheck
 on:
   pull_request:
     types: ['opened', 'edited', 'reopened', 'synchronize']
