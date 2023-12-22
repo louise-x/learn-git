@@ -24,11 +24,10 @@ jobs:
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-          git config --local pull.rebase true
     - name: Merge main back to trunk
       run: |
-          git pull origin main
-          echo 'git merge -X ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"'
+          git fetch origin main
+          git merge -X theirs origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
           git diff-index --quiet HEAD || git push -u origin HEAD --verbose -f
           echo "git token $github.token"
           echo "git ref is $github.ref"
