@@ -1,4 +1,4 @@
-name: Create PR
+name: DummyCheck
 on:
   workflow_dispatch:
   # pull_request:
