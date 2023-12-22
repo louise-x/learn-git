@@ -1,0 +1,24 @@
+name: Advanced PR GH CLI
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - test-1
+
+jobs:
+  create-PR:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    # - name: Set Git config
+    #   run: |
+    #       git config --local user.email "actions@github.com"
+    #       git config --local user.name "Github Actions"
+    - name: pull-request
+      run: |
+        cp version.yml test-version.yml
+        git add test-version.yml
+        git commit -m "update test version yaml"
+        git push
+        gh_pr_up() { gh pr create $* || gh pr edit $* }
+        gh_pr_up --title "My pull request" --body "Description"
