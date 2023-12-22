@@ -27,7 +27,7 @@ jobs:
           git fetch
           git checkout gitops
           git pull
-          git merge --no-ff main -m "Auto-merge master back to dev"
+          git merge --no-ff origin/main -m "Auto-merge master back to dev"
           git push
     # - name: Merge main back to trunk
     #   run: |
