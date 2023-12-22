@@ -20,4 +20,4 @@ jobs:
         git add test-version.yml
         git commit -m "update test version yaml"
         git push
-        gh pr create --title "The bug is fixed" --body "Everything works again"
+        gh pr create --title "The bug is fixed" --body "Everything works again" --base main --head test-1
