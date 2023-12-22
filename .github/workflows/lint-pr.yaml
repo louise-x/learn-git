@@ -24,14 +24,19 @@ jobs:
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-    - name: Merge main back to trunk
-      run: |
-          git fetch origin main
-          git merge -s ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
-          echo 'git merge -X theirs origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"'
-          git diff-index --quiet HEAD || git push -u origin HEAD --verbose -f
-          echo "git token $github.token"
-          echo "git ref is $github.ref"
+          git fetch
+          git checkout gitops
+          git pull
+          git merge --no-ff main -m "Auto-merge master back to dev"
+          git push
+    # - name: Merge main back to trunk
+    #   run: |
+    #       git fetch origin main
+    #       git merge -s ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
+    #       echo 'git merge -X theirs origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"'
+    #       git diff-index --quiet HEAD || git push -u origin HEAD --verbose -f
+    #       echo "git token $github.token"
+    #       echo "git ref is $github.ref"
   update-values:
     # if: github.event.pull_request.merged == true
     needs: merge-main-back-to-trunk
