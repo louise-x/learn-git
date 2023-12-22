@@ -20,6 +20,4 @@ jobs:
       run: |
         cp version.yml test-version.yml
         git add test-version.yml
-        git commit -m "update test version yaml"
-        git push
-        gh pr create --title "The bug is fixed" --body "Everything works again" --base main --head test-1
+        git diff-index --quiet HEAD || git commit -m 'update' && git push && gh pr create --title "The bug is fixed" --body "Everything works again" --base main --head test-1
