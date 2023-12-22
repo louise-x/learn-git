@@ -1,5 +1,8 @@
 name: Lint PR
 on:
+  push:
+    branches:
+      - main
   # pull_request:
   #   types: ['opened', 'edited', 'reopened', 'synchronize']
   pull_request:
