@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    # - name: Set Git config
-    #   run: |
-    #       git config --local user.email "actions@github.com"
-    #       git config --local user.name "Github Actions"
+    - name: Set Git config
+      run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
     - name: pull-request
       run: |
         cp version.yml test-version.yml
