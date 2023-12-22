@@ -13,7 +13,7 @@ on:
     
 jobs:
   merge-main-back-to-trunk:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     timeout-minutes: 2
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +32,7 @@ jobs:
           echo "git token $github.token"
           echo "git ref is $github.ref"
   update-values:
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     needs: merge-main-back-to-trunk
     runs-on: ubuntu-latest
     steps:
