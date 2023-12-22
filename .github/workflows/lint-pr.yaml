@@ -26,9 +26,9 @@ jobs:
           git config --local user.name "Github Actions"
     - name: Merge main back to trunk
       run: |
-          git fetch origin main
-          git merge -X ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
-          git push -u origin HEAD --verbose -f
+          git pull origin main
+          echo 'git merge -X ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"'
+          git diff-index --quiet HEAD || git push -u origin HEAD --verbose -f
           echo "git token $github.token"
           echo "git ref is $github.ref"
   update-values:
