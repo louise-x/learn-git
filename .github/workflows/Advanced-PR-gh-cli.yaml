@@ -20,5 +20,4 @@ jobs:
         git add test-version.yml
         git commit -m "update test version yaml"
         git push
-        gh_pr_up() { gh pr create $* || gh pr edit $* }
-        gh_pr_up --title "My pull request" --body "Description"
+        gh pr create --title "The bug is fixed" --body "Everything works again"
