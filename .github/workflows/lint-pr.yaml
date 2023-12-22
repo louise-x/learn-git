@@ -24,11 +24,14 @@ jobs:
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-          git fetch
-          git checkout gitops
-          git pull
-          git merge --no-ff origin/main -m "Auto-merge master back to dev"
-          git push
+    - name: Merge main -> gitops
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        from_branch: main
+        target_branch: gitops
+        message: Merge main into gitops
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     # - name: Merge main back to trunk
     #   run: |
     #       git fetch origin main
