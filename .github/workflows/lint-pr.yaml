@@ -24,7 +24,7 @@ jobs:
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-          git config --local pull.ff only 
+          git config --local pull.rebase true
     - name: Merge main back to trunk
       run: |
           git pull origin main
