@@ -27,7 +27,7 @@ jobs:
     - name: Merge main back to trunk
       run: |
           git fetch origin main
-          git merge -s ours origin/main
+          git merge -s ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"'
           echo 'git merge -X theirs origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"'
           git diff-index --quiet HEAD || git push -u origin HEAD --verbose -f
           echo "git token $github.token"
