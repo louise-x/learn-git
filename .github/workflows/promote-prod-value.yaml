@@ -15,7 +15,7 @@ jobs:
           git config --local user.name "Github Actions"
     - name: promote stg to prod
       run: |
-        git fetch origin/gitops
+        git fetch origin gitops
         git checkout origin/gitops -- stg-value.yaml
         cp stg-value.yaml prod-value.yaml
         git add .
