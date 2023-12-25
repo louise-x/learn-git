@@ -27,7 +27,7 @@ jobs:
           git config --local pull.ff true
           git fetch origin main
           git reset --hard origin/main
-          git diff-index --quiet HEAD || git push -u origin HEAD -f
+          git push -u origin HEAD -f
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
