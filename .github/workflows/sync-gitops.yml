@@ -26,21 +26,16 @@ jobs:
           git config --local user.name "Github Actions "
           git config --local pull.ff true
           git fetch origin main
-          git diff-index --quiet HEAD || git merge origin/main -s recursive -Xtheirs
-          git diff-index --quiet HEAD || git commit -m "always merge latest main"
-          git diff-index --quiet HEAD || git push
-    # - uses: prompt/actions-merge-branch@v2
-    #   with:
-    #     from: "origin/main"
-    #     strategy: recursive -Xtheirs
-    # - name: Merge main -> gitops
-    #   uses: devmasx/merge-branch@master
-    #   with:
-    #     type: now
-    #     from_branch: main
-    #     target_branch: gitops
-    #     message: Merge main into gitops
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+          git reset --hard origin/main
+          git diff-index --quiet HEAD || git push -u origin HEAD -f
+    - name: Merge main -> gitops
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        from_branch: main
+        target_branch: gitops
+        message: Merge main into gitops
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
   # update-values:
   #   # if: github.event.pull_request.merged == true
