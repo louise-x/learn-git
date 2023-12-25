@@ -18,7 +18,7 @@ jobs:
         git checkout origin/gitops -- stg-value.yaml
         cp stg-value.yaml prod-value.yaml
         git add .
-        git commit -m "promote prod `git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
+        git diff-index --quiet HEAD || git commit -m "promote prod `git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:

@@ -32,7 +32,7 @@ jobs:
           git checkout origin/gitops -- stg-value.yaml
           git add stg-value.yaml
           git status
-          git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
+          git diff-index --quiet HEAD || git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
     - name: Debugging
       run: |
           git push -u origin HEAD -f
