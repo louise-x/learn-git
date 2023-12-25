@@ -1,3 +1,3 @@
 images:
-  - name: ws
-    newTag: refs/heads/main-71a09b42fe2a1a43b8e422905577b1918fe36c62
+  - name: gitops
+    newTag: refs/heads/main-62fe91c246c4e28781bdcb3f0d491019c38a66e4
