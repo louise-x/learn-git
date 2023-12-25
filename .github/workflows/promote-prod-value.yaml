@@ -9,19 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: gitops
     - name: Set Git config
       run: |
-          git status
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
     - name: promote stg to prod
       run: |
+        git checkout origin/gitops -- stg-value.yaml
         cp stg-value.yaml prod-value.yaml
         git add .
         git commit -m "promote prod `git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
-        git push
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:
@@ -30,8 +27,7 @@ jobs:
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         signoff: false
-        branch: gitops
-        base: main
+        branch: promote-prod
         delete-branch: false
         title: '[Example] promote stg to prod'
         body: |
