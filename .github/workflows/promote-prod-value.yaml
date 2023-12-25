@@ -1,0 +1,6 @@
+name: Promote Prod Ver Workflow
+
+on: 
+  push:
+    branches:
+      - release/R*
