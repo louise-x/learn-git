@@ -33,6 +33,8 @@ jobs:
           git add stg-value.yaml
           echo "previous commit msg !! `git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
           git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
+    - name: Debugging
+      run: |
           git push -u origin HEAD -f
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
