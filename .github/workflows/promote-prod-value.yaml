@@ -1,6 +1,9 @@
 name: Promote Prod Ver Workflow
 
-on: workflow_dispatch
+on:
+  workflow_dispatch: # Putting here is also fine!!
+  release:
+    types: [created]
 
 jobs:
   promote-stg-to-prod:
