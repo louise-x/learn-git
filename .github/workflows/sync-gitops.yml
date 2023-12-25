@@ -42,27 +42,27 @@ jobs:
     #     message: Merge main into gitops
     #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
-  update-values:
-    # if: github.event.pull_request.merged == true
-    needs: merge-main-back-to-gitops
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: gitops
-      - name: Update deployment.yaml
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          valueFile: "version.yml"
-          propertyPath: "images[0].newTag"
-          value: "${{ github.ref }}-${{ github.sha }}"
-          message: "Update image tag: ${{ github.ref }}-${{ github.sha }}"
-          createPR: false
-          title: "Update gitops image tag"
-          # targetBranch: gitops
-          branch: gitops
-          masterBranchName: main
-          commitChange: true
-          description: |
-            Update image tag: ${{ github.ref }}-${{ github.sha }} Desc
+  # update-values:
+  #   # if: github.event.pull_request.merged == true
+  #   needs: merge-main-back-to-gitops
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         ref: gitops
+  #     - name: Update deployment.yaml
+  #       uses: fjogeleit/yaml-update-action@main
+  #       with:
+  #         valueFile: "version.yml"
+  #         propertyPath: "images[0].newTag"
+  #         value: "${{ github.ref }}-${{ github.sha }}"
+  #         message: "Update image tag: ${{ github.ref }}-${{ github.sha }}"
+  #         createPR: false
+  #         title: "Update gitops image tag"
+  #         # targetBranch: gitops
+  #         branch: gitops
+  #         masterBranchName: main
+  #         commitChange: true
+  #         description: |
+  #           Update image tag: ${{ github.ref }}-${{ github.sha }} Desc
