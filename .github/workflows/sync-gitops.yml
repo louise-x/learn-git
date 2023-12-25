@@ -25,7 +25,6 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
           git config --local pull.ff true
-          fetch-depth: 0
     - uses: prompt/actions-merge-branch@v2
       with:
         from: "origin/main"
