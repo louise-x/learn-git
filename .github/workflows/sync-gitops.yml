@@ -28,14 +28,14 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
           git diff-index --quiet HEAD || git push -u origin HEAD -f
-    - name: Merge main -> gitops
-      uses: devmasx/merge-branch@master
-      with:
-        type: now
-        from_branch: main
-        target_branch: gitops
-        message: Merge main into gitops
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Merge main -> gitops
+    #   uses: devmasx/merge-branch@master
+    #   with:
+    #     type: now
+    #     from_branch: main
+    #     target_branch: gitops
+    #     message: Merge main into gitops
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
   update-values:
     # if: github.event.pull_request.merged == true
