@@ -26,9 +26,9 @@ jobs:
           git config --local user.name "Github Actions "
           git config --local pull.ff true
           git fetch origin main
-          git diff-index --quiet HEAD || git merge origin/main -s recursive -Xtheirs && \
-          git commit -m "always merge latest main" && \
-          git push
+          git diff-index --quiet HEAD || git merge origin/main -s recursive -Xtheirs
+          git diff-index --quiet HEAD || git commit -m "always merge latest main"
+          git diff-index --quiet HEAD || git push
     # - uses: prompt/actions-merge-branch@v2
     #   with:
     #     from: "origin/main"
