@@ -31,7 +31,7 @@ jobs:
           git reset --hard origin/main
           git checkout origin/gitops -- stg-value.yaml
           git add stg-value.yaml
-          echo "previous commit msg !! `git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
+          git status --staged
           git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
     - name: Debugging
       run: |
