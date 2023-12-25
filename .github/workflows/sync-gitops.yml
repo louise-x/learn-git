@@ -52,8 +52,8 @@ jobs:
           createPR: false
           title: "Update gitops image tag"
           # targetBranch: gitops
-          # branch: gitops
-          # masterBranchName: main
+          branch: gitops
+          masterBranchName: main
           commitChange: true
           description: |
             Update image tag: ${{ github.sha }} Desc
