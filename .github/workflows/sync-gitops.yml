@@ -1,4 +1,4 @@
-name: Lint PR
+name: Sync-And-Update-Gitops
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ on:
       - main
     
 jobs:
-  merge-main-back-to-trunk:
+  merge-main-back-to-gitops:
     # if: github.event.pull_request.merged == true
     timeout-minutes: 2
     runs-on: ubuntu-latest
@@ -32,17 +32,10 @@ jobs:
         target_branch: gitops
         message: Merge main into gitops
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    # - name: Merge main back to trunk
-    #   run: |
-    #       git fetch origin main
-    #       git merge -s ours origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"
-    #       echo 'git merge -X theirs origin/main --allow-unrelated-histories -m "Auto-merge main to gitops"'
-    #       git diff-index --quiet HEAD || git push -u origin HEAD --verbose -f
-    #       echo "git token $github.token"
-    #       echo "git ref is $github.ref"
+
   update-values:
     # if: github.event.pull_request.merged == true
-    needs: merge-main-back-to-trunk
+    needs: merge-main-back-to-gitops
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -57,10 +50,10 @@ jobs:
           value: "${{ github.ref }}-${{ github.sha }}"
           message: "Update image tag: ${{ github.sha }}"
           createPR: false
-          title: "Update image tag"
+          title: "Update gitops image tag"
           # targetBranch: gitops
-          branch: gitops
-          masterBranchName: main
+          # branch: gitops
+          # masterBranchName: main
           commitChange: true
           description: |
             Update image tag: ${{ github.sha }} Desc

@@ -9,3 +9,28 @@ jobs:
     steps:
     - name: Set Git config
       run: echo "branch cut occurred $github.ref"
+  update-values:
+    # if: github.event.pull_request.merged == true
+    needs: check-if-branchcut
+    if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: gitops
+      - name: Update stg-values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: "stg-values.yml"
+          propertyPath: "images[0].newTag"
+          value: "${{ github.ref }}-${{ github.sha }}"
+          message: "Update image tag: ${{ github.sha }}"
+          createPR: false
+          title: "Update stg-values with ${{ github.ref }} tag"
+          # targetBranch: gitops
+          branch: gitops
+          masterBranchName: main
+          commitChange: true
+          description: |
+            Update image tag: ${{ github.sha }} Desc
