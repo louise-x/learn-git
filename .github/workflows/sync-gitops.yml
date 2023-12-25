@@ -27,6 +27,7 @@ jobs:
           git config --local pull.ff true
           git fetch origin main
           git reset --hard origin/main
+          git checkout origin/gitops -- stg-value.yaml
           git push -u origin HEAD -f
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
@@ -51,8 +52,8 @@ jobs:
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
-          value: "${{ github.ref }}-${{ github.sha }}"
-          message: "Update image tag: ${{ github.ref }}-${{ github.sha }}"
+          value: "${{ github.ref_name }}-${{ github.sha }}"
+          message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
           createPR: false
           title: "Update gitops image tag"
           # targetBranch: gitops
@@ -60,4 +61,4 @@ jobs:
           masterBranchName: main
           commitChange: true
           description: |
-            Update image tag: ${{ github.ref }}-${{ github.sha }} Desc
+            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc

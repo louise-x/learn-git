@@ -11,39 +11,33 @@ jobs:
     # if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
     runs-on: ubuntu-latest
     steps:
-    # - uses: actions/checkout@v2
-    # - name: Set Git config
-    #   run: |
-    #       git status
-    #       git config --local user.email "actions@github.com"
-    #       git config --local user.name "Github Actions"
-    - name: Get Last Branch and Semantic Version Containing String
-      id: lrb
-      uses: jessicalostinspace/github-action-get-regex-branch@v1.0.2
-      with:
-        regex-string: 'release/R' 
-# need to check if this step will be auto skipped
-  # update-stg-values:
-  #   # if: github.event.pull_request.merged == true
-  #   needs: release-branch-workflow
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #       with:
-  #         ref: gitops
-  #     - name: Update deployment.yaml
-  #       uses: fjogeleit/yaml-update-action@main
-  #       with:
-  #         valueFile: "stg-value.yml"
-  #         propertyPath: "images[0].newTag"
-  #         value: "${{ github.ref }}-${{ github.sha }}"
-  #         message: "Update image tag: ${{ github.ref }}-${{ github.sha }}"
-  #         createPR: false
-  #         title: "Update gitops image tag"
-  #         # targetBranch: gitops
-  #         # branch: gitops
-  #         # masterBranchName: main
-  #         commitChange: true
-  #         description: |
-  #           Update image tag: ${{ github.ref }}-${{ github.sha }} Desc
+    - uses: actions/checkout@v2
+    - name: Set Git config
+      run: |
+          git status
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
+  update-stg-values:
+    # if: github.event.pull_request.merged == true
+    needs: release-branch-workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: gitops
+      - name: Update deployment.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: "stg-value.yaml"
+          propertyPath: "images[0].newTag"
+          value: "${{ github.ref_name }}-${{ github.sha }}"
+          message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
+          createPR: false
+          title: "Update gitops image tag"
+          # targetBranch: gitops
+          branch: gitops
+          masterBranchName: github.ref
+          commitChange: true
+          description: |
+            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc
