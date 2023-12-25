@@ -25,11 +25,13 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions "
           git config --local pull.ff true
+    - name: Sync main to gitops
+      run: |
           git fetch origin main
           git reset --hard origin/main
           git checkout origin/gitops -- stg-value.yaml
           git add stg-value.yaml
-          git commit -m "align stg-value"
+          git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
           git push -u origin HEAD -f
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
