@@ -8,7 +8,7 @@ on:
 
 jobs:
   release-branch-workflow:
-    if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
+    # if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
     runs-on: ubuntu-latest
     steps:
     # - uses: actions/checkout@v2
