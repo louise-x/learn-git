@@ -25,10 +25,14 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions "
           git config --local pull.ff true
-    - uses: prompt/actions-merge-branch@v2
-      with:
-        from: "origin/main"
-        strategy: recursive -Xtheirs
+          git fetch origin main
+          git diff-index --quiet HEAD || git merge origin/main -s recursive -Xtheirs && \
+          git commit -m "always merge latest main" && \
+          git push
+    # - uses: prompt/actions-merge-branch@v2
+    #   with:
+    #     from: "origin/main"
+    #     strategy: recursive -Xtheirs
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
