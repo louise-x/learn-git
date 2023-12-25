@@ -28,6 +28,8 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
           git checkout origin/gitops -- stg-value.yaml
+          git add stg-value.yaml
+          git commit -m "align stg-value"
           git push -u origin HEAD -f
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
