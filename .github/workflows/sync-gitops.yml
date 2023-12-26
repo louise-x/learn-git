@@ -37,7 +37,7 @@ jobs:
       run: |
         git fetch origin main
         git checkout main
-        git merge --allow-unrelated-histories gitops
+        git merge --allow-unrelated-histories -X ours gitops
     - name: Debugging
       run: |
           git push -u origin gitops -f
