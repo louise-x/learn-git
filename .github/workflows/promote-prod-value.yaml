@@ -28,7 +28,8 @@ jobs:
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         signoff: false
-        branch: promote-prod
+        base: main
+        branch: gitops
         delete-branch: false
         title: '[Example] promote stg to prod'
         body: |
