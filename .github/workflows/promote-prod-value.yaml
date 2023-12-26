@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: gitops
     - name: Set Git config
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
     - name: promote stg to prod
       run: |
-        git fetch origin gitops
-        git checkout origin/gitops -- stg-value.yaml
         cp stg-value.yaml prod-value.yaml
         git add .
         git diff-index --quiet HEAD || git commit -m "promote prod `git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
@@ -28,9 +28,8 @@ jobs:
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         signoff: false
-        base: main
-        branch: gitops
-        delete-branch: false
+        branch: promote-stg-prod
+        delete-branch: true
         title: '[Example] promote stg to prod'
         body: |
           promote stg to prod
