@@ -3,6 +3,10 @@ name: Promote Prod Ver Workflow
 on:
   workflow_dispatch: # Putting here is also fine!!
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   promote-stg-to-prod:
     # if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
