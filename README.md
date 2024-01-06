@@ -7,6 +7,7 @@ change main-2
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
+add release/R006
 
 Things you may want to cover:
 
