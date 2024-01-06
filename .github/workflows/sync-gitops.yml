@@ -1,13 +1,13 @@
 name: Sync-And-Update-Gitops
 on:
-  push:
-    branches:
-      - main
-  # pull_request:
-  #   types: ['opened', 'edited', 'reopened', 'synchronize']
+  # push:
+  #   branches:
+  #     - main
   pull_request:
-    types:
-      - closed
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+  # pull_request:
+  #   types:
+  #     - closed
     branches:
       - main
     
@@ -36,6 +36,7 @@ jobs:
     - name: Debugging
       run: |
           git push -u origin gitops -f
+          echo "branch name tranfer to: ${BRANCH_NAME//\//-}"
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
