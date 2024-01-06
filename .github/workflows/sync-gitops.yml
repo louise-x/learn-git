@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      # with:
-      #   ref: gitops
+      with:
+        ref: rel/test-branch
     - name: Set Git config
       run: |
           git config --local user.email "actions@github.com"
