@@ -37,7 +37,7 @@ jobs:
       env:
         BRANCH: ${{ github.ref_name }}
       run: |
-          echo "branch name tranfer to: ${BRANCH_NAME//\//-}"
+          echo "branch name tranfer to: ${BRANCH//\//-}"
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
