@@ -35,7 +35,7 @@ jobs:
     #       git diff-index --quiet HEAD || git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
     - name: Debugging
       env:
-        BRANCH: ${{ github.ref_name }}
+        BRANCH: ${GITHUB_REF}
       run: |
           echo "branch name tranfer to: ${BRANCH//\//-}"
     # - name: Merge main -> gitops
