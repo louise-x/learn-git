@@ -1,7 +1,7 @@
 name: Release Branch Workflow
 
 on: 
-  # create:
+  create:
   push:
     branches:
       - release/R*
