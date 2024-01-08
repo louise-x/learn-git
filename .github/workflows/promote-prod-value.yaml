@@ -26,8 +26,8 @@ jobs:
         git add .
         git diff-index --quiet HEAD || git commit -m "promote prod `git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v5
       id: cpr
+      uses: peter-evans/create-pull-request@v5
       with:
         token: ${{ github.token }}
         commit-message: promote stg to prod
@@ -44,7 +44,7 @@ jobs:
         assignees: ${{ github.actor }}
         reviewers: louise-x
         draft: false
-      - name: Check outputs
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+    - name: Check outputs
+      if: ${{ steps.cpr.outputs.pull-request-number }}
+      run: |
+        echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
