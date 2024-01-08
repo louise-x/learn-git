@@ -4,41 +4,43 @@ on:
   # create:
   push:
     branches:
-      # - release/R*
-      - dummy
+      - release/R*
 
 jobs:
   release-branch-workflow:
-    # if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
+    if: ${{ startsWith(github.ref, 'refs/heads/release/R') }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set Git config
+      env:
+        BRANCH:  ${{ github.head_ref || github.ref_name }}
       run: |
           git status
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-  update-stg-values:
-    # if: github.event.pull_request.merged == true
-    needs: release-branch-workflow
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: gitops
-      - name: Update deployment.yaml
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          valueFile: "stg-value.yaml"
-          propertyPath: "images[0].newTag"
-          value: "${{ github.ref_name }}-${{ github.sha }}"
-          message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
-          createPR: false
-          title: "Update gitops image tag"
-          # targetBranch: gitops
-          branch: gitops
-          masterBranchName: github.ref
-          commitChange: true
-          description: |
-            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc
+          echo "branch is $BRANCH"
+  # update-stg-values:
+  #   # if: github.event.pull_request.merged == true
+  #   needs: release-branch-workflow
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #       with:
+  #         ref: gitops
+  #     - name: Update deployment.yaml
+  #       uses: fjogeleit/yaml-update-action@main
+  #       with:
+  #         valueFile: "stg-value.yaml"
+  #         propertyPath: "images[0].newTag"
+  #         value: "${{ github.ref_name }}-${{ github.sha }}"
+  #         message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
+  #         createPR: false
+  #         title: "Update gitops image tag"
+  #         # targetBranch: gitops
+  #         branch: gitops
+  #         masterBranchName: github.ref
+  #         commitChange: true
+  #         description: |
+  #           Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc

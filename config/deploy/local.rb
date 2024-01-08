@@ -5,4 +5,4 @@
 set :stage, :local
 set :rails_env, :local
 set :branch, "main"
-server "localhost", roles: %w{web app db}
+server "localhost", roles: %w{web app db }
