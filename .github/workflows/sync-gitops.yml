@@ -1,5 +1,6 @@
 name: Sync-And-Update-Gitops
 on:
+  # workflow_dispatch: # Putting here is also fine!!
   # push:
   #   branches:
   #     - main
@@ -16,7 +17,7 @@ env:
 jobs:
   merge-main-back-to-gitops:
     # if: github.event.pull_request.merged == true
-    timeout-minutes: 2
+    # timeout-minutes: 2
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -38,7 +39,11 @@ jobs:
     - name: Debugging
       run: |
           git push -u origin gitops -f
-          echo "branch name tranfer to: ${BRANCH_NAME//\//-}"
+          echo "branch name tranfer to: ${BRANCH//\//-}"
+          BRANCH_NAME=${BRANCH//\//-}
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+    - name: print env
+      run: echo "branch name" ${{ env.BRANCH_NAME }}
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
@@ -59,12 +64,10 @@ jobs:
           ref: gitops
       - name: Update deployment.yaml
         uses: fjogeleit/yaml-update-action@main
-        env:
-          BRANCH_NAME: ${BRANCH//\//-}
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
-          value: "$BRANCH_NAME-${{ github.sha }}"
+          value: "${{ github.ref_name }}-${{ github.sha }}"
           message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
           createPR: false
           title: "Update gitops image tag"
@@ -73,4 +76,5 @@ jobs:
           masterBranchName: main
           commitChange: true
           description: |
-            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc
+            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc ${{ env.BRANCH_NAME }}
+            echo ${{ env }}
