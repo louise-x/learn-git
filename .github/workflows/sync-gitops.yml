@@ -59,10 +59,12 @@ jobs:
           ref: gitops
       - name: Update deployment.yaml
         uses: fjogeleit/yaml-update-action@main
+        env:
+          BRANCH_NAME: ${BRANCH//\//-}
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
-          value: "${BRANCH//\//-}-${{ github.sha }}"
+          value: "$BRANCH_NAME-${{ github.sha }}"
           message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
           createPR: false
           title: "Update gitops image tag"
