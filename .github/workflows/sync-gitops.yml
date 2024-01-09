@@ -44,6 +44,7 @@ jobs:
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
           # : echo "BRANCH_NAME=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
           # : echo "::set-output BRANCH_NAME=${BRANCH_NAME}"
+          echo "actor is" ${{ github.actor }}
     - name: print env
       run: echo "branch name" ${{ env }}
     # - name: Merge main -> gitops
