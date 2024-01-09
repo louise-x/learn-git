@@ -10,7 +10,9 @@ on:
   #     - closed
     branches:
       - main
-    
+env:
+  BRANCH:  ${{ github.head_ref || github.ref_name }}
+  
 jobs:
   merge-main-back-to-gitops:
     # if: github.event.pull_request.merged == true
@@ -19,25 +21,24 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: rel/test-branch
+        ref: gitops
     - name: Set Git config
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions "
           git config --local pull.ff true
-    # - name: Sync main to gitops
-    #   run: |
-    #       git fetch origin main
-    #       git reset --hard origin/main
-    #       git checkout origin/gitops -- stg-value.yaml
-    #       git add stg-value.yaml
-    #       git status
-    #       git diff-index --quiet HEAD || git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
-    - name: Debugging
-      env:
-        BRANCH: ${{ github.head_ref }}
+    - name: Sync main to gitops
       run: |
-          echo "branch name tranfer to: ${BRANCH//\//-}"
+          git fetch origin main
+          git reset --hard origin/main
+          git checkout origin/gitops -- stg-value.yaml
+          git add stg-value.yaml
+          git status
+          git diff-index --quiet HEAD || git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
+    - name: Debugging
+      run: |
+          git push -u origin gitops -f
+          echo "branch name tranfer to: ${BRANCH_NAME//\//-}"
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
@@ -58,10 +59,12 @@ jobs:
           ref: gitops
       - name: Update deployment.yaml
         uses: fjogeleit/yaml-update-action@main
+        env:
+          BRANCH_NAME: ${BRANCH//\//-}
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
-          value: "${{ github.ref_name }}-${{ github.sha }}"
+          value: "$BRANCH_NAME-${{ github.sha }}"
           message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
           createPR: false
           title: "Update gitops image tag"
