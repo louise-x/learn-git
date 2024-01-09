@@ -64,7 +64,7 @@ jobs:
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
-          value: "${BRANCH_NAME}-${{ github.sha }}"
+          value: "${github.ref_name}-${{ github.sha }}"
           message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
           createPR: false
           title: "Update gitops image tag"
@@ -73,4 +73,4 @@ jobs:
           masterBranchName: main
           commitChange: true
           description: |
-            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc
+            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc $BRANCH_NAME
