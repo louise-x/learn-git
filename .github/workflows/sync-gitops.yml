@@ -1,16 +1,6 @@
 name: Sync-And-Update-Gitops
-on:
-  # workflow_dispatch: # Putting here is also fine!!
-  # push:
-  #   branches:
-  #     - main
-  pull_request:
-    types: ['opened', 'edited', 'reopened', 'synchronize']
-  # pull_request:
-  #   types:
-  #     - closed
-    branches:
-      - main
+on: pull_request_target
+
 env:
   BRANCH:  ${{ github.head_ref || github.ref_name }}
   
