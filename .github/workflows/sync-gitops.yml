@@ -1,6 +1,6 @@
 name: Sync-And-Update-Gitops
 on:
-  workflow_dispatch: # Putting here is also fine!!
+  # workflow_dispatch: # Putting here is also fine!!
   # push:
   #   branches:
   #     - main
