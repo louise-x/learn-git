@@ -37,16 +37,15 @@ jobs:
           git status
           git diff-index --quiet HEAD || git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
     - name: Debugging
-      id: renamebranch
       run: |
           git push -u origin gitops -f
           echo "branch name tranfer to: ${BRANCH//\//-}"
           BRANCH_NAME=${BRANCH//\//-}
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
-          echo "BRANCH_NAME=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
-          echo "::set-output BRANCH_NAME=${BRANCH_NAME}"
+          # : echo "BRANCH_NAME=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
+          # : echo "::set-output BRANCH_NAME=${BRANCH_NAME}"
     - name: print env
-      run: echo "branch name" ${{ env.BRANCH_NAME }}
+      run: echo "branch name" ${{ env }}
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
@@ -65,12 +64,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: gitops
+      - name: setupENV
+        run: |
+            echo "branch name tranfer to: ${BRANCH//\//-}"
+            BRANCH_NAME=${BRANCH//\//-}
+            echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
       - name: Update deployment.yaml
         uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
-          value: "${{ github.ref_name }}-${{ github.sha }}"
+          value: "${{ env.BRANCH_NAME }}-${{ github.sha }}"
           message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
           createPR: false
           title: "Update gitops image tag"
@@ -79,5 +83,5 @@ jobs:
           masterBranchName: main
           commitChange: true
           description: |
-            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc ${{ steps.renamebranch.outputs.BRANCH_NAME }}
+            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc ${{ env.BRANCH_NAME }}
             echo ${{ env }}
