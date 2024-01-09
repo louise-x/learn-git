@@ -37,11 +37,14 @@ jobs:
           git status
           git diff-index --quiet HEAD || git commit -m "`git log -1 --pretty=format:'%s' origin/gitops -- stg-value.yaml`"
     - name: Debugging
+      id: renamebranch
       run: |
           git push -u origin gitops -f
           echo "branch name tranfer to: ${BRANCH//\//-}"
           BRANCH_NAME=${BRANCH//\//-}
           echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> "$GITHUB_OUTPUT"
+          echo "::set-output BRANCH_NAME=${BRANCH_NAME}"
     - name: print env
       run: echo "branch name" ${{ env.BRANCH_NAME }}
     # - name: Merge main -> gitops
@@ -76,5 +79,5 @@ jobs:
           masterBranchName: main
           commitChange: true
           description: |
-            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc ${{ env.BRANCH_NAME }}
+            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc ${{ steps.renamebranch.outputs.BRANCH_NAME }}
             echo ${{ env }}
