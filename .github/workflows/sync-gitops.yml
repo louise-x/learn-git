@@ -1,6 +1,16 @@
 name: Sync-And-Update-Gitops
-on: pull_request_target
-
+on:
+  # workflow_dispatch: # Putting here is also fine!!
+  # push:
+  #   branches:
+  #     - main
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize']
+  # pull_request:
+  #   types:
+  #     - closed
+    branches:
+      - main
 env:
   BRANCH:  ${{ github.head_ref || github.ref_name }}
   
@@ -55,7 +65,7 @@ jobs:
       - name: Update deployment.yaml
         uses: fjogeleit/yaml-update-action@main
         env:
-          TESTBRANCH_NAME: ${BRANCH//\//-}
+          BRANCH_NAME: ${BRANCH//\//-}
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
