@@ -10,7 +10,7 @@ test branch name transfer
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-test-env more
+test-env more_
 Things you may want to cover:
 
 * Ruby version
