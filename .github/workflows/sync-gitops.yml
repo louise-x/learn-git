@@ -38,7 +38,8 @@ jobs:
     - name: Debugging
       run: |
           git push -u origin gitops -f
-          echo "branch name tranfer to: ${BRANCH_NAME//\//-}"
+          echo "branch name tranfer to: ${BRANCH//\//-}"
+          echo "BRANCH_NAME=${BRANCH//\//-}" >> $GITHUB_ENV
     # - name: Merge main -> gitops
     #   uses: devmasx/merge-branch@master
     #   with:
@@ -59,8 +60,6 @@ jobs:
           ref: gitops
       - name: Update deployment.yaml
         uses: fjogeleit/yaml-update-action@main
-        env:
-          BRANCH_NAME: ${BRANCH//\//-}
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
@@ -73,4 +72,4 @@ jobs:
           masterBranchName: main
           commitChange: true
           description: |
-            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc ${{ BRANCH_NAME }}
+            Update image tag: ${{ github.ref_name }}-${{ github.sha }} Desc ${{ env.BRANCH_NAME }} 
