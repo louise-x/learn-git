@@ -10,7 +10,9 @@ on:
   #     - closed
     branches:
       - main
-    
+env:
+  BRANCH:  ${{ github.head_ref || github.ref_name }}
+  
 jobs:
   merge-main-back-to-gitops:
     # if: github.event.pull_request.merged == true
@@ -60,7 +62,7 @@ jobs:
         with:
           valueFile: "version.yml"
           propertyPath: "images[0].newTag"
-          value: "${{ github.ref_name }}-${{ github.sha }}"
+          value: "${BRANCH//\//-}-${{ github.sha }}"
           message: "Update image tag: ${{ github.ref_name }}-${{ github.sha }}"
           createPR: false
           title: "Update gitops image tag"
