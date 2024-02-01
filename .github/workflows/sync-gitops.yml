@@ -16,6 +16,9 @@ env:
   
 jobs:
   merge-main-back-to-gitops:
+    permissions:
+      contents: read
+      pull-requests: write
     # if: github.event.pull_request.merged == true
     # timeout-minutes: 2
     runs-on: ubuntu-latest
@@ -54,6 +57,7 @@ jobs:
       # Label based on branch name
       - uses: actions-ecosystem/action-add-labels@v1
         with:
+          number: ${{ steps.cpr.outputs.pull-request-number }}
           labels: automerge
       - name: Auto merge
         # if: success() && github.actor == 'ws-internal-tools[bot]'
