@@ -28,6 +28,7 @@ jobs:
           git fetch origin gitops
           git checkout origin/gitops -- stg-value.yaml
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
           branch: stg-promotion
@@ -43,6 +44,9 @@ jobs:
         # if: github.actor == 'ws-internal-tools[bot]'
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+        env:
+          BRANCH: stg-promotion
+          PULL_REQUEST_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
       - name: Auto merge
         # if: success() && github.actor == 'ws-internal-tools[bot]'
         uses: pascalgn/automerge-action@v0.16.2
