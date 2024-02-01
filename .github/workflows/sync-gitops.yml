@@ -21,16 +21,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: gitops
+        # with:
+        #   ref: gitops
       - name: Reset promotion branch
         run: |
-          git fetch origin main:main
-          git reset --hard main
+          git fetch origin/gitops
+          git checkout origin/gitops -- stg-value.yaml
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: production-promotion
+          branch: stg-promotion
+      # - name: enable automerge
+      #   if: steps.open-pr.outputs.pr_number != ''
+      #   uses: peter-evans/enable-pull-request-automerge@v2
+      #   with:
+      #     token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      #     pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
+      #     merge-method: merge
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v3
+        # if: github.actor == 'ws-internal-tools[bot]'
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Auto merge
+        # if: success() && github.actor == 'ws-internal-tools[bot]'
+        uses: pascalgn/automerge-action@v0.16.2
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
     # - uses: actions/checkout@v2
     #   with:
