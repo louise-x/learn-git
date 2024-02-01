@@ -34,7 +34,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: stg-promotion
+          branch: test-stg-promotion
       # - name: enable automerge
       #   if: steps.open-pr.outputs.pr_number != ''
       #   uses: peter-evans/enable-pull-request-automerge@v2
