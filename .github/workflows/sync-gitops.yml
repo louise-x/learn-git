@@ -44,8 +44,8 @@ jobs:
         # if: github.actor == 'ws-internal-tools[bot]'
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-          BRANCH: stg-promotion
-          PULL_REQUEST_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          review-message: "checked by bot"
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
       - name: Auto merge
         # if: success() && github.actor == 'ws-internal-tools[bot]'
         uses: pascalgn/automerge-action@v0.16.2
