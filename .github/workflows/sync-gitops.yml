@@ -16,9 +16,9 @@ env:
   
 jobs:
   merge-main-back-to-gitops:
-    permissions:
-      contents: read
-      pull-requests: write
+    # permissions:
+    #   contents: read
+    #   pull-requests: write
     # if: github.event.pull_request.merged == true
     # timeout-minutes: 2
     runs-on: ubuntu-latest
