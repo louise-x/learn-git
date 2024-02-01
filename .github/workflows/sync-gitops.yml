@@ -50,15 +50,11 @@ jobs:
       #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
       - name: Label the PR
         # if: success() && github.actor == 'ws-internal-tools[bot]'
-        uses: actions/github-script@v5
+        uses: actions/labeler@v5
+      # Label based on branch name
+      - uses: actions-ecosystem/action-add-labels@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ['automerge']
-            })
+          labels: automerge
       - name: Auto merge
         # if: success() && github.actor == 'ws-internal-tools[bot]'
         uses: pascalgn/automerge-action@v0.16.2
