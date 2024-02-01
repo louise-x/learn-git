@@ -64,7 +64,7 @@ jobs:
         uses: pascalgn/automerge-action@v0.16.2
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
+          PULL_REQUEST:  ${{ steps.cpr.outputs.pull-request-number }}
     # - uses: actions/checkout@v2
     #   with:
     #     ref: gitops
