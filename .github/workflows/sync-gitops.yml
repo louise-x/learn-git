@@ -39,13 +39,15 @@ jobs:
       #     token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       #     pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
       #     merge-method: merge
-      - name: Auto approve
-        uses: hmarr/auto-approve-action@v3
-        # if: github.actor == 'ws-internal-tools[bot]'
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-          review-message: "checked by bot"
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+      
+      # ▼ it's working!!!
+      # - name: Auto approve
+      #   uses: hmarr/auto-approve-action@v3
+      #   # if: github.actor == 'ws-internal-tools[bot]'
+      #   with:
+      #     github-token: "${{ secrets.GITHUB_TOKEN }}"
+      #     review-message: "checked by bot"
+      #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
       - name: Auto merge
         # if: success() && github.actor == 'ws-internal-tools[bot]'
         uses: pascalgn/automerge-action@v0.16.2
