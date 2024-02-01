@@ -43,7 +43,7 @@ jobs:
       #     pull-request-number: ${{ steps.open-pr.outputs.pr_number }}
       #     merge-method: merge
       
-      # ▼ it's working!!!
+      # ▼ it's working!!! !
       # - name: Auto approve
       #   uses: hmarr/auto-approve-action@v3
       #   # if: github.actor == 'ws-internal-tools[bot]'
