@@ -18,7 +18,7 @@ jobs:
           app_id: ${{ vars.GH_APP_ID }}
           private_key: ${{ secrets.GH_PRIVATE_KEY }}
           permissions: >-
-            {"pull_requests": "write"}     
+            {"pull_requests": "write", "contents": "write", "actions": "write"}     
       - uses: actions/checkout@v4
       - name: Create commits
         run: |
