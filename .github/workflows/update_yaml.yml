@@ -18,9 +18,7 @@ jobs:
           app_id: ${{ vars.GH_APP_ID }}
           private_key: ${{ secrets.GH_PRIVATE_KEY }}
           permissions: >-
-            {"pull_requests": "write"}
-          repositories: >-
-            ["louise-x/learn-git"]          
+            {"pull_requests": "write"}     
       - uses: actions/checkout@v4
       - name: Create commits
         run: |
