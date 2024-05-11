@@ -19,7 +19,6 @@ jobs:
           private_key: ${{ secrets.GH_PRIVATE_KEY }}
           permissions: >-
             {"pull_requests": "write"}
-          private_key: ${{ secrets.PRIVATE_KEY }}
           repositories: >-
             ["louise-x/learn-git"]          
       - uses: actions/checkout@v4
