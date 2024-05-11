@@ -11,3 +11,40 @@ jobs:
       - name: A event received
         run: |
           echo "payload Foo '${{ github.event.client_payload.foo }}'"
+      - name: Obtain Github Authentication Token
+        id: create_token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ vars.GH_APP_ID }}
+          private_key: ${{ secrets.GH_PRIVATE_KEY }}
+          
+      - uses: actions/checkout@v4
+      - name: Create commits
+        run: |
+          git config user.name 'GH Actions Runner [bot]'
+          git config user.email 'gh-actions-runner-bot@github.com'
+          yq -i '.images[0].name = "${{ github.event.client_payload.foo }}"' stg-value.yaml
+          git add -A
+          git commit -m "Add test file during workflow"
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: test-stg-value
+          labels: automerge
+        env:
+          GITHUB_TOKEN: ${{ steps.create_token.outputs.token }}
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+        run:
+          echo "cpr actor is '${{ github.actor }}'"
+      - name: Auto merge
+        # if: success() && github.actor == 'ws-internal-tools[bot]'
+        uses: pascalgn/automerge-action@v0.16.2
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          PULL_REQUEST:  ${{ steps.cpr.outputs.pull-request-number }}
