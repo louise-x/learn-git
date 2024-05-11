@@ -40,7 +40,6 @@ jobs:
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-        run:
           echo "cpr actor is '${{ github.actor }}'"
       - name: Auto merge
         # if: success() && github.actor == 'ws-internal-tools[bot]'
