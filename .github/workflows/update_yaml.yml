@@ -42,12 +42,15 @@ jobs:
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
           echo "cpr actor is '${{ github.actor }}'"
-          
-          
-
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v4
+        # if: github.actor == 'ws-internal-tools[bot]'
+        with:
+          github-token: "${{ secrets.LX_PAT_TOKEN }}"
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
       - name: Auto merge
         # if: success() && github.actor == 'ws-internal-tools[bot]'
         uses: pascalgn/automerge-action@v0.16.2
         env:
-          GITHUB_TOKEN: "${{ secrets.PAT }}"
+          GITHUB_TOKEN: " ${{ steps.create_token.outputs.token }} "
           PULL_REQUEST:  ${{ steps.cpr.outputs.pull-request-number }}
