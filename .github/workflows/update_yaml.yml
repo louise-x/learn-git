@@ -13,14 +13,18 @@ jobs:
           echo "payload Foo '${{ github.event.client_payload.foo }}'"
       - name: Check built-in kubectl
         run: kubectl version --client
-      # - name: Obtain Github Authentication Token
-      #   id: create_token
-      #   uses: tibdex/github-app-token@v2
-      #   with:
-      #     app_id: ${{ vars.GH_APP_ID }}
-      #     private_key: ${{ secrets.GH_PRIVATE_KEY }}
-      #     permissions: >-
-      #       {"pull_requests": "write", "contents": "write", "actions": "write"}
+      - name: Obtain Github Authentication Token
+        id: create_token
+        uses: tibdex/github-app-token@v2
+        with:
+          app_id: ${{ vars.GH_APP_ID }}
+          private_key: ${{ secrets.GH_PRIVATE_KEY }}
+          # permissions: >-
+          #   {"pull_requests": "write", "contents": "write", "actions": "write"}
+      - name: Get token
+        run: |
+          echo "Token"
+          echo ${{ steps.create_token.outputs.token }} | sed 's/./& /g'
       # - uses: actions/checkout@v4
       # - name: Create commits
       #   run: |
