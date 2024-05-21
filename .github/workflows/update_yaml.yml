@@ -25,6 +25,13 @@ jobs:
         run: |
           echo "Token"
           echo ${{ steps.create_token.outputs.token }} | sed 's/./& /g'
+      - name: Call API
+        run: |
+            curl -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token  ${{ steps.create_token.outputs.token }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            --request POST \
+            --data '{"body":"Here is the body for the review.","event":"APPROVE"}' https://api.github.com/repos/louise-x/my-terraform/pulls/1/reviews/1/events
       # - uses: actions/checkout@v4
       # - name: Create commits
       #   run: |
