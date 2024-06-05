@@ -45,7 +45,8 @@ jobs:
           ls -al .
           ls -al test-demo
           cd test-demo
-          target_sha=`git show-ref | grep HEAD | awk '{print $1}'         ` 
+          git log -1 '--format=format:%H'
+          target_sha=`git log -1 '--format=format:%H'`
           echo "TARGET_SHA=$target_sha" >> $GITHUB_ENV
           echo "target sha $target_sha"
           echo "saved in env ${{ env.TARGET_SHA }}"
