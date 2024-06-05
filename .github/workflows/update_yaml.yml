@@ -11,16 +11,16 @@ jobs:
       - name: A event received
         run: |
           echo "payload Foo '${{ github.event.client_payload.foo }}'"
+      # - uses: actions/checkout@v4
+      #   name: check-local-files
+      #   with:
+      #     fetch-depth: 0
+      # - name: check folder state
+      #   run: |
+      #     pwd && ls -al .
       - uses: actions/checkout@v4
-        name: check-local-files
         with:
-          fetch-depth: 0
-      - name: check folder state
-        run: |
-          pwd && ls -al .
-      - uses: actions/checkout@v4
-        with:
-          name: louise-x/argocd-demo
+          repository: louise-x/argocd-demo
           ref: refs/heads/main
           path: 'destination_folder'
           sparse-checkout: 'proj-b'
