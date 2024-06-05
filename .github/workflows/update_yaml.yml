@@ -42,13 +42,6 @@ jobs:
           yq -i '.images[0].name = "${{ github.event.client_payload.foo }}"' test-demo/proj-b/base/common.yaml
           git add -A
           git commit -m "sync from repo louise-x/argocd-demo {{ env.TARGET_SHA }}"
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: test-stg-value
-          labels: automerge
-          token:  ${{ steps.create_token.outputs.token }}
       - name: Obtain Github Authentication Token
         id: create_token
         uses: tibdex/github-app-token@v2
@@ -61,6 +54,13 @@ jobs:
         run: |
           echo "Token"
           echo ${{ steps.create_token.outputs.token }} | sed 's/./& /g'
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: test-stg-value
+          labels: automerge
+          token:  ${{ steps.create_token.outputs.token }}
       - name: Check outputs
         if: ${{ steps.cpr.outputs.pull-request-number }}
         run: |
