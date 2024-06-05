@@ -1,0 +1,3 @@
+images:
+  - name: bar
+    newTag: release/R005111-123
