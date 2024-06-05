@@ -59,8 +59,7 @@ jobs:
           git config user.email 'gh-actions-runner-bot@github.com'
           yq -i '.images[0].name = "${{ github.event.client_payload.foo }}"' test-demo/proj-b/base/common.yaml
           git add .
-          git commit -m "sync from repo louise-x/argocd-demo ${{ env.TARGET_SHA }}"
-
+          git commit -m "sync from repo https://github.com/louise-x/argocd-demo/commit/${{ env.TARGET_SHA }}"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
@@ -88,10 +87,10 @@ jobs:
           PULL_REQUEST:  ${{ steps.cpr.outputs.pull-request-number }}
           MERGE_RETRIES: "50"
           MERGE_RETRY_SLEEP: "15000"
-# sync source repo folder  ✔
-# update field
-# create PR
-# merge PR
-# case 1: src repo folder: add file
-# case 2: src repo folder: remove file
-# case 3: src repo folder: dest new folder
+# sync source repo folder                                 ✔
+# update field                                            ✔
+# create PR                                               ✔
+# merge PR                                                ✔
+# case 1: src repo folder: add file                       ✔
+# case 2: src repo folder: remove file                    ✔
+# case 3: src repo folder: dest new folder                ✔
