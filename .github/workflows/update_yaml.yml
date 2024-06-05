@@ -18,7 +18,7 @@ jobs:
       - name: check folder state
         run: |
           pwd && ls -al .
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
         with:
           name: louise-x/argocd-demo
           ref: refs/heads/main
