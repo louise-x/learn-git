@@ -27,21 +27,6 @@ jobs:
           sparse-checkout: 'proj-b'
           sparse-checkout-cone-mode: false
           # token: ${{ secrets.my_pat }}   for private repo
-      - name: check new repo folder state
-        run: |
-          echo "current folder state"
-          ls -al .
-          ls -al test-demo
-          cd test-demo
-          target_sha=`git show-ref | grep HEAD | awk '{print $1}'         ` 
-          echo "TARGET_SHA=$target_sha" >> $GITHUB_ENV
-      - name: Create commits
-        run: |
-          git config user.name 'GH Actions Runner [bot]'
-          git config user.email 'gh-actions-runner-bot@github.com'
-          yq -i '.images[0].name = "${{ github.event.client_payload.foo }}"' test-demo/proj-b/base/common.yaml
-          git add -A
-          git commit -m "sync from repo louise-x/argocd-demo {{ env.TARGET_SHA }}"
       - name: Obtain Github Authentication Token
         id: create_token
         uses: tibdex/github-app-token@v2
@@ -54,6 +39,27 @@ jobs:
         run: |
           echo "Token"
           echo ${{ steps.create_token.outputs.token }} | sed 's/./& /g'
+      - name: check new repo folder state
+        run: |
+          echo "current folder state"
+          ls -al .
+          ls -al test-demo
+          cd test-demo
+          target_sha=`git show-ref | grep HEAD | awk '{print $1}'         ` 
+          echo "TARGET_SHA=$target_sha" >> $GITHUB_ENV
+          echo "target sha $target_sha"
+          echo "saved in env ${{ env.TARGET_SHA }}"
+          rm -rf .git
+          cd ..
+      - name: Create commits
+        run: |
+          pwd
+          git config user.name 'GH Actions Runner [bot]'
+          git config user.email 'gh-actions-runner-bot@github.com'
+          yq -i '.images[0].name = "${{ github.event.client_payload.foo }}"' test-demo/proj-b/base/common.yaml
+          git add .
+          git commit -m "sync from repo louise-x/argocd-demo ${{ env.TARGET_SHA }}"
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
