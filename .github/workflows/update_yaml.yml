@@ -15,6 +15,7 @@ jobs:
         name: check-local-files
         with:
           fetch-depth: 0
+      - name: check folder state
         run: |
           pwd && ls -al .
       - uses: actions/checkout@master
@@ -25,6 +26,7 @@ jobs:
           sparse-checkout: 'proj-b'
           sparse-checkout-cone-mode: false
           # token: ${{ secrets.my_pat }}   for private repo
+      - name: check new repo folder state
         run: |
           echo "current folder state"
           ls -al .
