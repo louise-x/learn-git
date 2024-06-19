@@ -1,97 +1,16 @@
-name: GH-Receiver
- 
+name: GH-Actions-Basic
+
 on:
-  repository_dispatch:
-    types: [some_event]
- 
+  push:
+    branches:
+      - main
+
 jobs:
-  receiver:
+  read-env:
     runs-on: ubuntu-latest
+    environment:
+      name: env-01
     steps:
-      - name: A event received
+      - name: Read Env vars
         run: |
-          echo "payload Foo '${{ github.event.client_payload.foo }}'"
-      - uses: actions/checkout@v4
-        name: check-local-files
-        with:
-          fetch-depth: 0
-      - name: check folder state
-        run: |
-          pwd && ls -al .
-          rm -rf test-demo
-      - uses: actions/checkout@v4
-        with:
-          repository: louise-x/argocd-demo
-          ref: refs/heads/main
-          path: 'test-demo'
-          sparse-checkout: 'proj-b'
-          sparse-checkout-cone-mode: false
-          # token: ${{ secrets.my_pat }}   for private repo
-      - name: Obtain Github Authentication Token
-        id: create_token
-        uses: tibdex/github-app-token@v2
-        with:
-          app_id: ${{ vars.GH_APP_ID }}
-          private_key: ${{ secrets.GH_PRIVATE_KEY }}
-          # permissions: >-
-          #   {"pull_requests": "write", "contents": "write", "actions": "write"}
-      - name: Get token
-        run: |
-          echo "Token"
-          echo ${{ steps.create_token.outputs.token }} | sed 's/./& /g'
-      - name: check new repo folder state
-        run: |
-          echo "current folder state"
-          ls -al .
-          ls -al test-demo
-          cd test-demo
-          git log -1 '--format=format:%H'
-          target_sha=`git log -1 '--format=format:%H'`
-          echo "TARGET_SHA=$target_sha" >> $GITHUB_ENV
-          echo "target sha $target_sha"
-          echo "saved in env ${{ env.TARGET_SHA }}"
-          rm -rf .git
-          cd ..
-      - name: Create commits
-        run: |
-          pwd
-          git config user.name 'GH Actions Runner [bot]'
-          git config user.email 'gh-actions-runner-bot@github.com'
-          yq -i '.images[0].name = "${{ github.event.client_payload.foo }}"' test-demo/proj-b/base/common.yaml
-          git add .
-          git commit -m "sync from repo https://github.com/louise-x/argocd-demo/commit/${{ github.event.client_payload.foo }}"
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: test-stg-value
-          labels: automerge
-          token:  ${{ steps.create_token.outputs.token }}
-      - name: Check outputs
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-          echo "cpr actor is '${{ github.actor }}'"
-      # - name: Auto approve
-      #   uses: hmarr/auto-approve-action@v4
-      #   # if: github.actor == 'ws-internal-tools[bot]'
-      #   with:
-      #     github-token: "${{ secrets.LX_PAT_TOKEN }}"
-      #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-      - name: Auto merge
-        # if: success() && github.actor == 'ws-internal-tools[bot]'
-        uses: pascalgn/automerge-action@v0.16.2
-        env:
-          GITHUB_TOKEN: " ${{ steps.create_token.outputs.token }} "
-          PULL_REQUEST:  ${{ steps.cpr.outputs.pull-request-number }}
-          MERGE_RETRIES: "50"
-          MERGE_RETRY_SLEEP: "15000"
-# sync source repo folder                                 ✔
-# update field                                            ✔
-# create PR                                               ✔
-# merge PR                                                ✔
-# prevent empty changes
-# case 1: src repo folder: add file                       ✔
-# case 2: src repo folder: remove file                    ✔
-# case 3: src repo folder: dest new folder                ✔
+          echo "env vars: '${{ vars.ENV_ID }}'"
