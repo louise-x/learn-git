@@ -4,19 +4,52 @@ on:
   push:
     branches:
       - main
+      - 'release/R*'
+  workflow_dispatch:
+    inputs:
+      request_name:
+        description: Trigger request
+        required: false
+        default: "test"
 
 jobs:
+  set-envs:
+    outputs:
+      deploy-branch: ${{ steps.set-envs.outputs.deploy_branch }}
+    runs-on: ubuntu-latest
+    environment:
+      name: env-01
+    steps:
+      - name: Check branch
+        id: set-envs
+        run: |
+          if ${{ startsWith(github.ref, 'refs/heads/release/R') }}; then
+            echo "deploy_branch=release" >> $GITHUB_OUTPUT
+          else
+            echo "deploy_env=main" >> $GITHUB_OUTPUT
+          fi         
+          
   read-env:
     runs-on: ubuntu-latest
+    needs: set-envs
     environment:
       name: env-01
     steps:
       - name: Read Env vars
         run: |
           echo "env vars: '${{ vars.ENV_ID }}'"
-      - uses: actions/checkout@v4
-      - name: Invoke Embedded Actions
-        uses: ./.github/actions/echo
-        with:
-          var_01: "test---01"
-          var_02: "test---02"
+          echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}""
+      # - name: Invoke Embedded Actions
+      #   uses: ./.github/actions/echo
+      #   with:
+      #     var_01: "test---01"
+      #     var_02: "test---02"
+  
+  react:
+    runs-on: ubuntu-latest
+    needs: read-env
+    if: github.event.inputs.request_name == 'test' 
+    steps:
+      - name: Check inputs
+        run: |
+          echo "got input request test"
