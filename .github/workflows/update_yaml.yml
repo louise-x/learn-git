@@ -14,3 +14,8 @@ jobs:
       - name: Read Env vars
         run: |
           echo "env vars: '${{ vars.ENV_ID }}'"
+      - name: Invoke Embedded Actions
+        uses: ./.github/actions/echo
+        with:
+            var_01: "test---01"
+            var_02: "test---02"
