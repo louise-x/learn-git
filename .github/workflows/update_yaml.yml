@@ -18,5 +18,5 @@ jobs:
       - name: Invoke Embedded Actions
         uses: ./.github/actions/echo
         with:
-            var_01: "test---01"
-            var_02: "test---02"
+          var_01: "test---01"
+          var_02: "test---02"

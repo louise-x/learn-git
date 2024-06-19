@@ -3,7 +3,7 @@ description: Reusable composite action.
 
 inputs:
   var_01:
-    required: true
+    required: false
     description: var_01 
   var_02:
     required: false
@@ -12,7 +12,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Test Embedded Actions
+    - name: Echo ing
       run: |
-          echo "var_01: '${{ inputs.var_01 }}'"
-          echo "var_02: '${{ inputs.var_02 }}'"
+        echo "var_01: '${{ inputs.var_01 }}'"
+        echo "var_02: '${{ inputs.var_02 }}'"
