@@ -30,14 +30,14 @@ jobs:
           else
             echo "deploy_branch=main" >> $GITHUB_OUTPUT
             echo "main"
-          fi         
+          fi
           
   read-env:
     runs-on: ubuntu-latest
     needs: set-envs
     environment:
       name: env-01
-    if: ${{ github.event.inputs.request_name }} == 'test' && github.ref == 'main'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Read Env vars
         run: |
@@ -54,7 +54,7 @@ jobs:
     needs: set-envs
     environment:
       name: env-01
-    if: ${{ github.event.inputs.request_name }} == 'test'  && startsWith(github.ref, 'refs/heads/release/R')
+    if: startsWith(github.ref, 'refs/heads/release/R')
     steps:
       - name: Read Env vars
         run: |
