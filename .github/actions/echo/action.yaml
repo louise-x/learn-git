@@ -14,6 +14,7 @@ runs:
   using: "composite"
   steps:
     - name: Echo ing
+      shell: bash
       run: |
         echo "var_01: '${{ inputs.var_01 }}'"
         echo "var_02: '${{ inputs.var_02 }}'"
