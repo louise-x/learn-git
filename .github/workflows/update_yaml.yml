@@ -38,7 +38,7 @@ jobs:
       - name: Read Env vars
         run: |
           echo "env vars: '${{ vars.ENV_ID }}'"
-          echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}""
+          echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
       # - name: Invoke Embedded Actions
       #   uses: ./.github/actions/echo
       #   with:
