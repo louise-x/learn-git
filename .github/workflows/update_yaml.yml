@@ -17,6 +17,7 @@ jobs:
     outputs:
       deploy-branch: ${{ steps.set-envs.outputs.deploy_branch }}
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.request_name }} == 'test' 
     environment:
       name: env-01
     steps:
@@ -36,6 +37,7 @@ jobs:
     needs: set-envs
     environment:
       name: env-01
+    if: ${{ github.event.inputs.request_name }} == 'test' and ${{ needs.set-envs.outputs.deploy-branch }}" == "main"
     steps:
       - name: Read Env vars
         run: |
@@ -46,6 +48,18 @@ jobs:
       #   with:
       #     var_01: "test---01"
       #     var_02: "test---02"
+  
+  read-env-release:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    environment:
+      name: env-01
+    if: ${{ github.event.inputs.request_name }} == 'test' and ${{ startsWith(github.ref, 'refs/heads/release/R') }}
+    steps:
+      - name: Read Env vars
+        run: |
+          echo "job is  read-env-release "
+          echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
   
   react:
     runs-on: ubuntu-latest
