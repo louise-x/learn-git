@@ -25,8 +25,10 @@ jobs:
         run: |
           if ${{ startsWith(github.ref, 'refs/heads/release/R') }}; then
             echo "deploy_branch=release" >> $GITHUB_OUTPUT
+            echo "branch is ${{ github.ref }}"
           else
-            echo "deploy_env=main" >> $GITHUB_OUTPUT
+            echo "deploy_branch=main" >> $GITHUB_OUTPUT
+            echo "main"
           fi         
           
   read-env:
@@ -48,7 +50,7 @@ jobs:
   react:
     runs-on: ubuntu-latest
     needs: read-env
-    if: github.event.inputs.request_name == 'test' 
+    if: ${{ github.event.inputs.request_name }} == 'test' 
     steps:
       - name: Check inputs
         run: |
