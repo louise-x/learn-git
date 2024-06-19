@@ -9,6 +9,7 @@ inputs:
     required: false
     description: var_02
     default: "var_02 default"
+
 runs:
   using: "composite"
   steps:
