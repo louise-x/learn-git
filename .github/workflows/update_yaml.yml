@@ -32,7 +32,7 @@ jobs:
             echo "main"
           fi
           echo ${{ github.event.inputs.request_name }}
-          echo "check the evt state: `${{ github.event.inputs.request_name }} == 'test'` "
+          echo "check the evt state: `"${{ github.event.inputs.request_name }}" == 'test'` "
           
   read-env:
     runs-on: ubuntu-latest
