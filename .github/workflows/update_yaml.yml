@@ -37,7 +37,7 @@ jobs:
     needs: set-envs
     environment:
       name: env-01
-    if: github.ref == 'refs/heads/main' && (${{ github.event.inputs.request_name }} != 'test' )
+    if: (${{ github.event.inputs.request_name }} != 'test' )
     steps:
       - name: Read Env vars
         run: |
@@ -54,7 +54,7 @@ jobs:
     needs: set-envs
     environment:
       name: env-01
-    if: startsWith(github.ref, 'refs/heads/release/R') && (${{ github.event.inputs.request_name }} != 'test' )
+    if: (${{ github.event.inputs.request_name }} != 'test' )
     steps:
       - name: Read Env vars
         run: |
