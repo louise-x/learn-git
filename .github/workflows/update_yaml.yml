@@ -31,6 +31,8 @@ jobs:
             echo "deploy_branch=main" >> $GITHUB_OUTPUT
             echo "main"
           fi
+          echo ${{ github.event.inputs.request_name }}
+          echo "check the evt state: ${{ github.event.inputs.request_name }} == 'test' "
           
   read-env:
     runs-on: ubuntu-latest
