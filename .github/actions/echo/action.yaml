@@ -5,7 +5,7 @@ inputs:
   var_01:
     required: true
     description: var_01 
-    var_02:
+  var_02:
     required: false
     description: var_02
     default: "var_02 default"
