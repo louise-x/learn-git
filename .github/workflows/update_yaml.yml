@@ -17,7 +17,7 @@ jobs:
     outputs:
       deploy-branch: ${{ steps.set-envs.outputs.deploy_branch }}
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.request_name }} == 'test' 
+    # if: ${{ github.event.inputs.request_name }} == 'test' 
     environment:
       name: env-01
     steps:
@@ -32,14 +32,13 @@ jobs:
             echo "main"
           fi
           echo ${{ github.event.inputs.request_name }}
-          echo "check the evt state: `"${{ github.event.inputs.request_name }}" == 'test'` "
           
   read-env:
     runs-on: ubuntu-latest
     needs: set-envs
     environment:
       name: env-01
-    if: github.event.inputs.request_name != 'test' 
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Read Env vars
         run: |
@@ -56,18 +55,18 @@ jobs:
     needs: set-envs
     environment:
       name: env-01
-    if:  github.event.inputs.request_name != 'test' 
+    if:  startsWith(github.ref, 'refs/heads/release/R')
     steps:
       - name: Read Env vars
         run: |
           echo "job is  read-env-release "
           echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
   
-  react:
-    runs-on: ubuntu-latest
-    needs: read-env
-    if: ${{ github.event.inputs.request_name }} == 'test' 
-    steps:
-      - name: Check inputs
-        run: |
-          echo "got input request test"
+  # react:
+  #   runs-on: ubuntu-latest
+  #   needs: read-env
+  #   if: ${{ github.event.inputs.request_name }} == 'test' 
+  #   steps:
+  #     - name: Check inputs
+  #       run: |
+  #         echo "got input request test"
