@@ -37,7 +37,7 @@ jobs:
     needs: set-envs
     environment:
       name: env-01
-    if: ${{ github.event.inputs.request_name }} == 'test' and ${{ needs.set-envs.outputs.deploy-branch }}" == "main"
+    if: ${{ github.event.inputs.request_name }} == 'test' && ${{ needs.set-envs.outputs.deploy-branch }}" == "main"
     steps:
       - name: Read Env vars
         run: |
@@ -54,7 +54,7 @@ jobs:
     needs: set-envs
     environment:
       name: env-01
-    if: ${{ github.event.inputs.request_name }} == 'test' and ${{ startsWith(github.ref, 'refs/heads/release/R') }}
+    if: ${{ github.event.inputs.request_name }} == 'test'  && ${{ startsWith(github.ref, 'refs/heads/release/R') }}
     steps:
       - name: Read Env vars
         run: |
