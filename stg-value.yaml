@@ -1,3 +1,4 @@
 images:
-  - name: bar
-    newTag: release/R005-28fe81640956840db46f4d659d91ed778adb38aa
+  - name: stg
+    newTag: release/R005-28fe81640956840db46f4d659d91ed778adb38aa-test
+
