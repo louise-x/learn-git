@@ -5,12 +5,11 @@ on:
     branches:
       - main
       - 'release/R*'
-  workflow_dispatch:
-    inputs:
-      request_name:
-        description: Trigger request
-        required: false
-        default: "test"
+  repository_dispatch:
+    types:
+      - some_event_01
+      - some_event_02
+  # workflow_dispatch:
 
 jobs:
   set-envs:
@@ -62,11 +61,20 @@ jobs:
           echo "job is  read-env-release "
           echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
   
-  # react:
-  #   runs-on: ubuntu-latest
-  #   needs: read-env
-  #   if: ${{ github.event.inputs.request_name }} == 'test' 
-  #   steps:
-  #     - name: Check inputs
-  #       run: |
-  #         echo "got input request test"
+  react_dispatch_some_event_01:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    if: github.event.event_type == 'some_event_01'
+    steps:
+      - name: Check inputs
+        run: |
+          echo "got input request some_event_01"
+
+  react_dispatch_some_event_02:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    if: github.event.event_type == 'some_event_02'
+    steps:
+      - name: Check inputs
+        run: |
+          echo "got input request some_event_02"
