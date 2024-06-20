@@ -13,14 +13,21 @@ on:
     types:
       - some_event_01
       - some_event_02
-  # workflow_dispatch:
-
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: Promote release to production env?
+        required: true
+        default: 'prod'
+        options:
+          - prod
 jobs:
   set-envs:
     outputs:
       deploy-branch: ${{ steps.set-envs.outputs.deploy_branch }}
     runs-on: ubuntu-latest
-    # if: ${{ github.event.inputs.request_name }} == 'test' 
+    # if: ${{ github.event.inputs.env }} == 'test' 
     environment:
       name: env-01
     steps:
@@ -36,7 +43,8 @@ jobs:
           fi
           echo "branch is ${{ github.ref }}"
           echo "ref_name is ${{ github.ref_name }}"
-          echo "is merged? ${{github.event.pull_request.merged}}""
+          echo "is merged? ${{github.event.pull_request.merged}}"
+          echo "workflow dispatch name ${{ github.event.inputs.env }} "
           
   read-env-main:
     runs-on: ubuntu-latest
