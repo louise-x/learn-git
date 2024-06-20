@@ -1,9 +1,13 @@
 name: GH-Actions-Basic
 
 on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'main'
   push:
     branches:
-      - main
       - 'release/R*'
   repository_dispatch:
     types:
@@ -32,7 +36,7 @@ jobs:
           fi
           echo "branch is ${{ github.ref }}"
           echo "ref_name is ${{ github.ref_name }}"
-          echo ${{ github.event.inputs.request_name }}
+          echo "is merged? ${{github.event.pull_request.merged}}""
           
   read-env-main:
     runs-on: ubuntu-latest
