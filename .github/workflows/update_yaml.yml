@@ -1,0 +1,82 @@
+name: GH-Actions-Basic
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/R*'
+  repository_dispatch:
+    types:
+      - some_event_01
+      - some_event_02
+  # workflow_dispatch:
+
+jobs:
+  set-envs:
+    outputs:
+      deploy-branch: ${{ steps.set-envs.outputs.deploy_branch }}
+    runs-on: ubuntu-latest
+    # if: ${{ github.event.inputs.request_name }} == 'test' 
+    environment:
+      name: env-01
+    steps:
+      - name: Check branch
+        id: set-envs
+        run: |
+          if ${{ startsWith(github.ref, 'refs/heads/release/R') }}; then
+            echo "deploy_branch=release" >> $GITHUB_OUTPUT
+            echo "branch is ${{ github.ref }}"
+          else
+            echo "deploy_branch=main" >> $GITHUB_OUTPUT
+            echo "main"
+          fi
+          echo ${{ github.event.inputs.request_name }}
+          
+  read-env-main:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    environment:
+      name: env-01
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Read Env vars
+        run: |
+          echo "env vars: '${{ vars.ENV_ID }}'"
+          echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
+          echo "evt name is ${{ github.event_name }}"
+          echo "evt type is ${{ github.event.action }}"
+      # - name: Invoke Embedded Actions
+      #   uses: ./.github/actions/echo
+      #   with:
+      #     var_01: "test---01"
+      #     var_02: "test---02"
+  
+  read-env-release:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    environment:
+      name: env-01
+    if:  startsWith(github.ref, 'refs/heads/release/R')
+    steps:
+      - name: Read Env vars
+        run: |
+          echo "job is  read-env-release "
+          echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
+  
+  react_dispatch_some_event_01:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    if: github.event.action == 'some_event_01'
+    steps:
+      - name: Check inputs
+        run: |
+          echo "got input request some_event_01"
+
+  react_dispatch_some_event_02:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    if: github.event.action == 'some_event_02'
+    steps:
+      - name: Check inputs
+        run: |
+          echo "got input request some_event_02"
