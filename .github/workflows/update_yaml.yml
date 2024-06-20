@@ -30,6 +30,8 @@ jobs:
             echo "deploy_branch=main" >> $GITHUB_OUTPUT
             echo "main"
           fi
+          echo "branch is ${{ github.ref }}"
+          echo "ref_name is ${{ github.ref_name }}"
           echo ${{ github.event.inputs.request_name }}
           
   read-env-main:
