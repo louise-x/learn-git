@@ -94,3 +94,11 @@ jobs:
       - name: Check inputs
         run: |
           echo "got input request some_event_02"
+          
+  react_workflow_dispatch:
+    runs-on: ubuntu-latest
+    needs: set-envs
+    if: github.event.inputs.env
+    steps:
+      - name: Check state
+        run: echo "react_workflow_dispatc"
