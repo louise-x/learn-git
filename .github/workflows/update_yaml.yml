@@ -43,8 +43,8 @@ jobs:
         run: |
           echo "env vars: '${{ vars.ENV_ID }}'"
           echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
-          echo "evt type is ${{ github.event.event_type }}"
-          echo "evt details is ${{ github.event }}"
+          echo "evt name is ${{ github.event_name }}"
+          echo "evt type is ${{ github.event.action }}"
       # - name: Invoke Embedded Actions
       #   uses: ./.github/actions/echo
       #   with:
@@ -66,7 +66,7 @@ jobs:
   react_dispatch_some_event_01:
     runs-on: ubuntu-latest
     needs: set-envs
-    if: github.event.event_type == 'some_event_01'
+    if: github.event_name == 'some_event_01'
     steps:
       - name: Check inputs
         run: |
@@ -75,7 +75,7 @@ jobs:
   react_dispatch_some_event_02:
     runs-on: ubuntu-latest
     needs: set-envs
-    if: github.event.event_type == 'some_event_02'
+    if: github.event_name== 'some_event_02'
     steps:
       - name: Check inputs
         run: |
