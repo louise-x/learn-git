@@ -120,6 +120,8 @@ jobs:
           echo "got input request some_event_01"
           echo "global env is ${{ env.DEPLOY_ENV }}"
           echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
+          TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}"
+          IMAGE_TAG=${{ env.IMAGE_TAG }}
 
 
   react_dispatch_some_event_02:
