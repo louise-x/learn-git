@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - 'release/R*'
+      - ‘main’
   repository_dispatch:
     types:
       - some_event_01
@@ -22,29 +23,50 @@ on:
         default: 'prod'
         options:
           - prod
+env:
+  DEPLOY_ENV: init
+
 jobs:
   set-envs:
-    outputs:
-      deploy-branch: ${{ steps.set-envs.outputs.deploy_branch }}
-    runs-on: ubuntu-latest
-    # if: ${{ github.event.inputs.env }} == 'test' 
-    environment:
-      name: env-01
-    steps:
-      - name: Check branch
-        id: set-envs
-        run: |
-          if ${{ startsWith(github.ref, 'refs/heads/release/R') }}; then
-            echo "deploy_branch=release" >> $GITHUB_OUTPUT
-            echo "branch is ${{ github.ref }}"
-          else
-            echo "deploy_branch=main" >> $GITHUB_OUTPUT
-            echo "main"
-          fi
-          echo "branch is ${{ github.ref }}"
-          echo "ref_name is ${{ github.ref_name }}"
-          echo "is merged? ${{github.event.pull_request.merged}}"
-          echo "workflow dispatch name ${{ github.event.inputs.env }} "
+  runs-on: ubuntu-latest
+  outputs:
+    deploy-branch: ${{ steps.set-envs.outputs.deploy_env }}
+  steps:
+    - name: Parse Dispatch Event
+      run: |
+        if ${{ startsWith(github.event.action, 'some_event_01') }}; then
+          echo "DEPLOY_ENV=some_event_01" >> $GITHUB_OUTPUT
+          echo "target env is ${{ env.DEPLOY_ENV }}"
+        elif ${{ startsWith(github.event.action, 'some_event_02') }}; then
+          echo "DEPLOY_ENV=some_event_02" >> $GITHUB_OUTPUT
+          echo "target env is ${{ env.DEPLOY_ENV }}"
+        else
+          echo "DEPLOY_ENV=dev" >> $GITHUB_OUTPUT
+          echo "target env is ${{ env.DEPLOY_ENV }}"
+        fi
+
+  # set-envs:
+  #   outputs:
+  #     deploy-branch: ${{ steps.set-envs.outputs.deploy_branch }}
+  #   runs-on: ubuntu-latest
+  #   # if: ${{ github.event.inputs.env }} == 'test' 
+  #   environment:
+  #     name: env-01
+  #   steps:
+  #     - name: Check branch
+  #       id: set-envs
+  #       run: |
+  #         if ${{ startsWith(github.ref, 'refs/heads/release/R') }}; then
+  #           echo "deploy_branch=release" >> $GITHUB_OUTPUT
+  #           echo "branch is ${{ github.ref }}"
+  #         else
+  #           echo "deploy_branch=main" >> $GITHUB_OUTPUT
+  #           echo "main"
+  #         fi
+  #         echo "branch is ${{ github.ref }}"
+  #         echo "ref_name is ${{ github.ref_name }}"
+  #         echo "is merged? ${{github.event.pull_request.merged}}"
+  #         echo "workflow dispatch name ${{ github.event.inputs.env }} "
           
   read-env-main:
     runs-on: ubuntu-latest
@@ -59,6 +81,7 @@ jobs:
           echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
           echo "evt name is ${{ github.event_name }}"
           echo "evt type is ${{ github.event.action }}"
+          echo "target env is ${{ env.DEPLOY_ENV }}"
       # - name: Invoke Embedded Actions
       #   uses: ./.github/actions/echo
       #   with:
@@ -85,6 +108,7 @@ jobs:
       - name: Check inputs
         run: |
           echo "got input request some_event_01"
+          echo "target env is ${{ env.DEPLOY_ENV }}"
 
   react_dispatch_some_event_02:
     runs-on: ubuntu-latest
@@ -94,6 +118,7 @@ jobs:
       - name: Check inputs
         run: |
           echo "got input request some_event_02"
+          echo "target env is ${{ env.DEPLOY_ENV }}"
           
   react_workflow_dispatch:
     runs-on: ubuntu-latest
