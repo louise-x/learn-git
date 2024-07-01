@@ -138,8 +138,9 @@ jobs:
       - name: Set Image tag
         run: |
           echo "image is ${{ env.IMAGE_TAG }}"
-          yq -i '.images[0].newTag = "${{ env.IMAGE_TAG }}"' version.yml
-          cat version.yml
+          TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}
+          yq -i '.images[0].newTag = "${{ env.IMAGE_TAG }}"' ./$TARGET_ENV/version.yml
+          cat ./$TARGET_ENV/version.yml
 
   react_dispatch_some_event_02:
     runs-on: ubuntu-latest
