@@ -123,7 +123,7 @@ jobs:
           TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}"
           IMAGE_TAG=${{ env.IMAGE_TAG }}
           if [[ "$TARGET_ENV"=="some_event_01" ]]; then
-            IMAGE_TAG=`yq '.images[0].newTag' stg-value.yaml`
+            IMAGE_TAG="testimage"
           fi
           echo "IMAGE_TAG is $IMAGE_TAG"
           echo "TARGET_ENV is $TARGET_ENV"
