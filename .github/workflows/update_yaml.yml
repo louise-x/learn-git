@@ -34,10 +34,10 @@ jobs:
     steps:
       - name: Parse Dispatch Event
         run: |
-          if ${{ github.event.action }} == 'some_event_01'; then
+          if "${{ github.event.action }}" == "some_event_01"; then
             echo "DEPLOY_ENV=some_event_01" >> $GITHUB_OUTPUT
             echo "target env is ${{ env.DEPLOY_ENV }}"
-          elif ${{ github.event.action }} == 'some_event_02'; then
+          elif "${{ github.event.action }}" == "some_event_02"; then
             echo "DEPLOY_ENV=some_event_02" >> $GITHUB_OUTPUT
             echo "target env is ${{ env.DEPLOY_ENV }}"
           else
