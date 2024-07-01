@@ -51,6 +51,8 @@ jobs:
             echo "default target env is ${{ steps.set-deploy-env.outputs.deploy_env }}"
             echo "local env is $deploy_env"
           fi
+      - name: Test env setup
+        run: echo "set env is ${{ env.DEPLOY_ENV }}" 
 
   # set-envs:
   #   outputs:
