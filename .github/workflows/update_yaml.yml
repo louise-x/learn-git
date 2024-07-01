@@ -30,18 +30,18 @@ jobs:
   set-envs:
     runs-on: ubuntu-latest
     outputs:
-      deploy-branch: ${{ steps.set-envs.outputs.deploy_env }}
+      DEPLOY_ENV: ${{ steps.set-envs.outputs.deploy_env }}
     steps:
       - name: Parse Dispatch Event
         run: |
           if [[ "${{ github.event.action }}"=='some_event_01' ]]; then
-            echo "DEPLOY_ENV=some_event_01" >> $GITHUB_OUTPUT
+            echo "deploy_env=some_event_01" >> $GITHUB_OUTPUT
             echo "target env is ${{ env.DEPLOY_ENV }}"
           elif [[ "${{ github.event.action }}"=='some_event_02' ]]; then
-            echo "DEPLOY_ENV=some_event_02" >> $GITHUB_OUTPUT
+            echo "deploy_env=some_event_02" >> $GITHUB_OUTPUT
             echo "target env is ${{ env.DEPLOY_ENV }}"
           else
-            echo "DEPLOY_ENV=dev" >> $GITHUB_OUTPUT
+            echo "deploy_env=dev" >> $GITHUB_OUTPUT
             echo "default target env is ${{ env.DEPLOY_ENV }}"
           fi
 
