@@ -122,14 +122,14 @@ jobs:
           echo "got input request some_event_01"
           echo "global env is ${{ env.DEPLOY_ENV }}"
           echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
-          TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}"
+          TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}
           IMAGE=${{ env.IMAGE_TAG }}
           if [[ "$TARGET_ENV"=="some_event_01" ]]; then
             IMAGE=`yq '.images[0].newTag' stg-value.yaml`
           fi
           echo "image is $IMAGE"
           echo "env is $TARGET_ENV"
-          yq -i '.images[0].newTag =$IMAGE' stg-value.yaml
+          yq -i '.images[0].newTag = "$IMAGE"' stg-value.yaml
           cat stg-value.yaml
 
   react_dispatch_some_event_02:
