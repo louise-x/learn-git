@@ -122,7 +122,13 @@ jobs:
           echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
           TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}"
           IMAGE_TAG=${{ env.IMAGE_TAG }}
-
+          if [[ "$TARGET_ENV"=="some_event_01" ]]; then
+            IMAGE_TAG=`yq '.images[0].newTag' stg-value.yaml`
+          fi
+          echo "IMAGE_TAG is $IMAGE_TAG"
+          echo "TARGET_ENV is $TARGET_ENV"
+          yq -i '.images[0].newTag = "${{ IMAGE_TAG }}"' stg-value.yaml
+          cat stg-value.yaml
 
   react_dispatch_some_event_02:
     runs-on: ubuntu-latest
