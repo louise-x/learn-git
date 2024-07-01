@@ -9,7 +9,7 @@ on:
   push:
     branches:
       - 'release/R*'
-      - ‘main’
+      - 'main'
   repository_dispatch:
     types:
       - some_event_01
