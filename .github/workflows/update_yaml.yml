@@ -128,12 +128,15 @@ jobs:
           echo "global env is ${{ env.DEPLOY_ENV }}"
           echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
           TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}
-          IMAGE=${{ env.IMAGE_TAG }}
+          IMAGE_TAG=${{ env.IMAGE_TAG }}
           if [[ "$TARGET_ENV"=="some_event_01" ]]; then
-            IMAGE=`yq '.images[0].newTag' stg-value.yaml`
+            IMAGE_TAG=`yq '.images[0].newTag' stg-value.yaml`
           fi
-          echo "image is $IMAGE"
+          echo "image is $IMAGE_TAG"
           echo "env is $TARGET_ENV"
+          echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_ENV
+      - name: Set Image tag
+          echo "image is ${{ env.IMAGE_TAG }}"
           yq -i '.images[0].newTag = "${{ env.IMAGE_TAG }}"' version.yml
           cat version.yml
 
