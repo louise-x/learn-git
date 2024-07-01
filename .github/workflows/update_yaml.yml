@@ -134,8 +134,8 @@ jobs:
           fi
           echo "image is $IMAGE"
           echo "env is $TARGET_ENV"
-          yq -i .images[0].newTag="$IMAGE-test" stg-value.yaml
-          cat stg-value.yaml
+          yq -i .images[0].newTag="$IMAGE" version.yaml
+          cat version.yaml
 
   react_dispatch_some_event_02:
     runs-on: ubuntu-latest
