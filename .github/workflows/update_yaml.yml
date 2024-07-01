@@ -30,19 +30,21 @@ jobs:
   set-envs:
     runs-on: ubuntu-latest
     outputs:
-      DEPLOY_ENV: ${{ steps.set-envs.outputs.deploy_env }}
+      deploy_env: ${{ steps.set-envs.outputs.deploy_env }}
     steps:
       - name: Parse Dispatch Event
         run: |
           if [[ "${{ github.event.action }}"=='some_event_01' ]]; then
             echo "deploy_env=some_event_01" >> $GITHUB_OUTPUT
-            echo "target env is ${{ env.DEPLOY_ENV }}"
+            echo "target env is ${{ env.deploy_env }}"
+            echo "local env is $deploy_env"
           elif [[ "${{ github.event.action }}"=='some_event_02' ]]; then
             echo "deploy_env=some_event_02" >> $GITHUB_OUTPUT
-            echo "target env is ${{ env.DEPLOY_ENV }}"
+            echo "local env is $deploy_env"
           else
             echo "deploy_env=dev" >> $GITHUB_OUTPUT
-            echo "default target env is ${{ env.DEPLOY_ENV }}"
+            echo "default target env is ${{ env.deploy_env }}"
+            echo "local env is $deploy_env"
           fi
 
   # set-envs:
@@ -81,7 +83,7 @@ jobs:
           echo "branch is ${{ needs.set-envs.outputs.deploy-branch }}"
           echo "evt name is ${{ github.event_name }}"
           echo "evt type is ${{ github.event.action }}"
-          echo "target env is ${{ env.DEPLOY_ENV }}"
+          echo "target env is ${{ env.deploy_env }}"
       # - name: Invoke Embedded Actions
       #   uses: ./.github/actions/echo
       #   with:
@@ -108,7 +110,7 @@ jobs:
       - name: Check inputs
         run: |
           echo "got input request some_event_01"
-          echo "target env is ${{ env.DEPLOY_ENV }}"
+          echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
 
   react_dispatch_some_event_02:
     runs-on: ubuntu-latest
@@ -118,7 +120,7 @@ jobs:
       - name: Check inputs
         run: |
           echo "got input request some_event_02"
-          echo "target env is ${{ env.DEPLOY_ENV }}"
+          echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
           
   react_workflow_dispatch:
     runs-on: ubuntu-latest
