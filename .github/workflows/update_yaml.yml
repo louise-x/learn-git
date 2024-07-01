@@ -122,7 +122,14 @@ jobs:
           echo "got input request some_event_01"
           echo "global env is ${{ env.DEPLOY_ENV }}"
           echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
-          
+          TARGET_ENV=${{ needs.set-envs.outputs.deploy_env }}"
+          IMAGE=${{ env.IMAGE_TAG }}
+
+          echo "image is $IMAGE_TAG"
+          echo "env is $TARGET_ENV"
+          yq -i '.images[0].newTag = "$IMAGE"' stg-value.yaml
+          cat stg-value.yaml
+
   react_dispatch_some_event_02:
     runs-on: ubuntu-latest
     needs: set-envs
