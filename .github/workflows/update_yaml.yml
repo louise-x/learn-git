@@ -38,7 +38,8 @@ jobs:
           if [[ "${{ github.event.action }}"=='some_event_01' ]]; then
             echo "deploy_env=some_event_01" >> $GITHUB_OUTPUT
             echo "01 target env is ${{ steps.set-deploy-env.outputs.deploy_env }}"
-            echo "local env is $deploy_env"
+            echo "DEPLOY_ENV=some_event_01" >> $GITHUB_ENV
+            echo "local env is ${{ env.DEPLOY_ENV }}"
           elif [[ "${{ github.event.action }}"=='some_event_02' ]]; then
             echo "deploy_env=some_event_02" >> $GITHUB_OUTPUT
             echo "02 target env is ${{ steps.set-deploy-env.outputs.deploy_env }}"
@@ -112,6 +113,7 @@ jobs:
       - name: Check inputs
         run: |
           echo "got input request some_event_01"
+          echo "global env is ${{ env.DEPLOY_ENV }}"
           echo "target env is ${{ needs.set-envs.outputs.deploy_env }}"
 
   react_dispatch_some_event_02:
