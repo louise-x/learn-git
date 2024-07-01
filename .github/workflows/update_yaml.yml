@@ -25,7 +25,7 @@ on:
           - prod
 env:
   DEPLOY_ENV: init
-  IMAGE_TAG: "abcdefg"
+  IMAGE_TAG: 92bf68648d563b6b0ce3aa2f3d4ae6b446ab45b5
 
 jobs:
   set-envs:
@@ -134,7 +134,7 @@ jobs:
           fi
           echo "image is $IMAGE"
           echo "env is $TARGET_ENV"
-          yq -i .images[0].newTag="$IMAGE" version.yml
+          yq -i '.images[0].newTag = "${{ env.IMAGE_TAG }}"' version.yml
           cat version.yml
 
   react_dispatch_some_event_02:
