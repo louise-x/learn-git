@@ -23,6 +23,12 @@ on:
         default: 'prod'
         options:
           - prod
+      dynamic_branch:
+        description: Select branch
+        required: true
+        type: dynamic_branch
+        default: main
+
 env:
   DEPLOY_ENV: init
   IMAGE_TAG: abc
