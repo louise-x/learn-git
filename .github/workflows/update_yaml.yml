@@ -36,6 +36,8 @@ jobs:
       - name: Parse Dispatch Event
         id: set-deploy-env
         run: |
+          echo "github.ref is ${{ github.ref }}"
+          echo "github.ref_name is ${{ github.ref_name }}"
           if [[ "${{ github.event.action }}"=='some_event_01' ]]; then
             echo "deploy_env=some_event_01" >> $GITHUB_OUTPUT
             echo "01 target env is ${{ steps.set-deploy-env.outputs.deploy_env }}"
