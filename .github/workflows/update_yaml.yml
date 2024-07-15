@@ -53,6 +53,7 @@ jobs:
             echo "local env is ${DEPLOY_ENV}"
           elif [[ "${{ github.event.action }}" == 'some_event_02' ]]; then
             echo "deploy_env=some_event_02" >> $GITHUB_OUTPUT
+            deploy_env="some_event_02"
             echo "02 target env is ${{ steps.set-deploy-env.outputs.deploy_env }}"
             echo "local env is $deploy_env"
           else
