@@ -44,14 +44,14 @@ jobs:
         run: |
           echo "github.ref is ${{ github.ref }}"
           echo "github.ref_name is ${{ github.ref_name }}"
-          if [[ "${{ github.event.action }}"=='some_event_01' ]]; then
+          if [[ "${{ github.event.action }}" == 'some_event_01' ]]; then
             echo "deploy_env=some_event_01" >> $GITHUB_OUTPUT
             echo "01 target env is ${{ steps.set-deploy-env.outputs.deploy_env }}"
             DEPLOY_ENV='some_event_01'
             echo "DEPLOY_ENV=${DEPLOY_ENV}" >> $GITHUB_ENV
             echo "set env is ${{ env.DEPLOY_ENV }}"
             echo "local env is ${DEPLOY_ENV}"
-          elif [[ "${{ github.event.action }}"=='some_event_02' ]]; then
+          elif [[ "${{ github.event.action }}" == 'some_event_02' ]]; then
             echo "deploy_env=some_event_02" >> $GITHUB_OUTPUT
             echo "02 target env is ${{ steps.set-deploy-env.outputs.deploy_env }}"
             echo "local env is $deploy_env"
