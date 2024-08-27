@@ -31,7 +31,7 @@ on:
 
 env:
   DEPLOY_ENV: init
-  IMAGE_TAG: abc
+  IMAGE_TAG: ${github.ref_name//\//-}-${{ github.sha }}
 
 jobs:
   set-envs:
@@ -42,6 +42,7 @@ jobs:
       - name: Parse Dispatch Event
         id: set-deploy-env
         run: |
+          echo "image is $IMAGE_TAG"
           echo "github.ref is ${{ github.ref }}"
           echo "github.ref_name is ${{ github.ref_name }}"
           if [[ "${{ github.event.action }}" == 'some_event_01' ]]; then
