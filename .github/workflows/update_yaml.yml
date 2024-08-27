@@ -31,7 +31,7 @@ on:
 
 env:
   DEPLOY_ENV: init
-  IMAGE_TAG: ${ ${{ github.ref_name}}//\//- }-${{ github.sha }}
+  IMAGE_TAG: ${GITHUB_REF////_}-${{ github.sha }}
 
 jobs:
   set-envs:
