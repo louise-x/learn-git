@@ -32,8 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install poetry
-          poetry run pip install requests
+          pip install requests
       - name: Run script
         run: python3 gh_actions_ip/gh_actions_ip_parser.py
       - name: check for changes
