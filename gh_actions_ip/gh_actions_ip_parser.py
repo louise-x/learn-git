@@ -64,8 +64,9 @@ def dump_gh_actions_ipset (
   if (len(prev & current) == len(prev) - 2):
     log.info(f"there is no change, return early")
     return
+
   vpn_list = os.environ["VPN"].replace(' ', '').split(',')
-  log.info(f"vpn_list lenght: {len(vpn_list)}")
+  log.info(f"vpn_list : {vpn_list}")
   ipset.extend(vpn_list)
   log.info(f"ipset ip set lenght: {len(ipset)}")
   with open(target_filepath, 'w') as f:
