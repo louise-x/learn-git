@@ -1,14 +1,14 @@
 name: Parser_GH_Actions
+# on:
+#   pull_request:
+#     types: ['opened', 'edited', 'reopened', 'synchronize']
+#     branches:
+#       - main
+#       - test-actions-merge
 on:
-  pull_request:
-    types: ['opened', 'edited', 'reopened', 'synchronize']
-  # pull_request:
-  #   types:
-  #     - closed
-  # push:
-    branches:
-      - main
-      - test-actions-merge
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */2 * * *"
 
 env:
   VPN: "44.230.80.97, 44.230.80.98"
