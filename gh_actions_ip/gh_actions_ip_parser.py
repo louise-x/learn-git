@@ -53,7 +53,7 @@ def filter_invalid_ip(ip_addr: str) -> str:
 
 def dump_gh_actions_ipset (
   ipset: list = [],
-  target_filepath: str = "./gh_actions_ipset.txt"
+  target_filepath: str = "./gh_actions_ip/gh_actions_ipset.txt"
 ) -> dict:
   # load file
   # compare if diff
