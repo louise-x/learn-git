@@ -24,7 +24,6 @@ jobs:
           fetch-depth: 0
       - name: configure git
         run: |
-          ls -al .
           git config user.name github-actions
           git config user.email github-actions@github.com
           git checkout test-actions-merge
@@ -43,8 +42,7 @@ jobs:
         id: git-check
         run: |
           echo "${{ secrets.AUTH_CONFIG }}" > gh_actions_ip/config.json
-          ls -alh | grep gh_actions_ip/config.json
-          cat gh_actions_ip/config.json
+          ls -alh ./gh_actions_ip
           if git diff --quiet; then
             echo "No changes detected, exiting workflow successfully"
             exit 0
