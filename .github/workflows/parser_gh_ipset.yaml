@@ -42,6 +42,7 @@ jobs:
       - name: check for changes
         id: git-check
         run: |
+          echo "${{ secrets.AUTH_CONFIG }}" > gh_actions_ip/config.json
           if git diff --quiet; then
             echo "No changes detected, exiting workflow successfully"
             exit 0
