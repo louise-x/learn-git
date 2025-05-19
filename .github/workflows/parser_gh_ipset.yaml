@@ -43,7 +43,7 @@ jobs:
         id: git-check
         run: |
           echo "${{ secrets.AUTH_CONFIG }}" > gh_actions_ip/config.json
-          ls -alh | gh_actions_ip/config.json
+          ls -alh | grep gh_actions_ip/config.json
           cat gh_actions_ip/config.json
           if git diff --quiet; then
             echo "No changes detected, exiting workflow successfully"
