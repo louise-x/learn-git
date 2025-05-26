@@ -17,5 +17,5 @@ jobs:
         ruby-version: 3.0.3
         bundler-cache: true
     - uses: r7kamura/rubocop-problem-matchers-action@v1 # this shows the failures in the PR
-    - run: gem install Cookstyle -v 7.31.1
-    - run: cookstyle -v
+    - run: gem install cookstyle -v 7.31.1
+    - run: which cookstyle && cookstyle -v
