@@ -3,6 +3,7 @@ Automerge
 Test Actions merge
 This README would normally document whatever steps are necessary to get the
 test ref
+test_multiple branches commit
 application up and running.
 
 Things you may want to cover:
